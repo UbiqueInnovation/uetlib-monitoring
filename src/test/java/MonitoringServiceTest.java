@@ -1,5 +1,4 @@
 import ch.ubique.backend.monitoring.service.MonitoringService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,11 +26,9 @@ public class MonitoringServiceTest {
 
     @Test
     public void givenMockingIsDoneByMockito_whenGetIsCalled_shouldReturnMockedObject() {
-        String str = "OK";
         Mockito.when(restTemplate.getForEntity(heartBeatEndpoint, String.class))
-                .thenReturn(new ResponseEntity(str, HttpStatus.OK));
-
-        String expected = monitoringService.heartBeat();
-        Assertions.assertEquals(str, expected);
+                .thenReturn(new ResponseEntity("OK", HttpStatus.OK));
+        monitoringService.heartBeat();
+        Mockito.verify(restTemplate, Mockito.times(1)).getForEntity(heartBeatEndpoint, String.class);
     }
 }
