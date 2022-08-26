@@ -1,5 +1,4 @@
 import ch.ubique.backend.monitoring.service.MonitoringService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,16 +18,38 @@ public class MonitoringServiceTest {
 
     @InjectMocks private MonitoringService monitoringService;
 
-    @BeforeEach
-    public void setHeartBeatEndpoint() {
+    @Test
+    public void testMockWithOKResponse() {
+        Mockito.when(restTemplate.getForEntity(heartBeatEndpoint, String.class))
+                .thenReturn(new ResponseEntity("OK", HttpStatus.OK));
+
+        // heartBeatEndpoint is null
+        monitoringService.heartBeat();
+        Mockito.verify(restTemplate, Mockito.times(0))
+                .getForEntity(heartBeatEndpoint, String.class);
+
+        // set heart beat endpoint to intended endpoint
         monitoringService.setHeartBeatEndpoint(heartBeatEndpoint);
+        monitoringService.heartBeat();
+        Mockito.verify(restTemplate, Mockito.times(1))
+                .getForEntity(heartBeatEndpoint, String.class);
+
+        // set heart beat endpoint not to intended endpoint (not null, non-empty)
+        monitoringService.setHeartBeatEndpoint("http://localhost:8081");
+        monitoringService.heartBeat();
+        Mockito.verify(restTemplate, Mockito.times(1))
+                .getForEntity(heartBeatEndpoint, String.class);
     }
 
     @Test
-    public void givenMockingIsDoneByMockito_whenGetIsCalled_shouldReturnMockedObject() {
+    public void testMockWithNotFoundResponse() {
         Mockito.when(restTemplate.getForEntity(heartBeatEndpoint, String.class))
-                .thenReturn(new ResponseEntity("OK", HttpStatus.OK));
+                .thenReturn(new ResponseEntity("NOT_FOUND", HttpStatus.NOT_FOUND));
+
+        // set heart beat endpoint to intended endpoint
+        monitoringService.setHeartBeatEndpoint(heartBeatEndpoint);
         monitoringService.heartBeat();
-        Mockito.verify(restTemplate, Mockito.times(1)).getForEntity(heartBeatEndpoint, String.class);
+        Mockito.verify(restTemplate, Mockito.times(1))
+                .getForEntity(heartBeatEndpoint, String.class);
     }
 }

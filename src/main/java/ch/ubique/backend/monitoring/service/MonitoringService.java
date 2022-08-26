@@ -22,11 +22,14 @@ public class MonitoringService {
     }
 
     public void heartBeat() {
-        if (!heartBeatEndpoint.isEmpty()) {
+        if (heartBeatEndpoint != null && !heartBeatEndpoint.isEmpty()) {
             logger.debug("Ping heart beat endpoint {}.", heartBeatEndpoint);
             ResponseEntity<String> response =
                     restTemplate.getForEntity(heartBeatEndpoint, String.class);
-            if (response.getStatusCode() != HttpStatus.OK) {
+            if (response == null) {
+                logger.warn("Heart beat endpoint {} returned null.", heartBeatEndpoint);
+            }
+            else if (response.getStatusCode() != HttpStatus.OK) {
                 logger.warn(
                         "Heart beat endpoint {} returned status {}.",
                         heartBeatEndpoint,
