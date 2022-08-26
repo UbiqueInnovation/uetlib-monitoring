@@ -33,12 +33,6 @@ public class MonitoringServiceTest {
         monitoringService.heartBeat();
         Mockito.verify(restTemplate, Mockito.times(1))
                 .getForEntity(heartBeatEndpoint, String.class);
-
-        // set heart beat endpoint not to intended endpoint (not null, non-empty)
-        monitoringService.setHeartBeatEndpoint("http://localhost:8081");
-        monitoringService.heartBeat();
-        Mockito.verify(restTemplate, Mockito.times(1))
-                .getForEntity(heartBeatEndpoint, String.class);
     }
 
     @Test
