@@ -26,10 +26,7 @@ public class MonitoringService {
             logger.debug("Ping heart beat endpoint {}.", heartBeatEndpoint);
             ResponseEntity<String> response =
                     restTemplate.getForEntity(heartBeatEndpoint, String.class);
-            if (response == null) {
-                logger.warn("Heart beat endpoint {} returned null.", heartBeatEndpoint);
-            }
-            else if (response.getStatusCode() != HttpStatus.OK) {
+            if (response.getStatusCode() != HttpStatus.OK) {
                 logger.warn(
                         "Heart beat endpoint {} returned status {}.",
                         heartBeatEndpoint,
