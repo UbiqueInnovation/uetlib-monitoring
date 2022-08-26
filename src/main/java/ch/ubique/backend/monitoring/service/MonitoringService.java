@@ -21,13 +21,17 @@ public class MonitoringService {
         this.heartBeatEndpoint = heartBeatEndpoint;
     }
 
-    public String heartBeat() {
+    public void heartBeat() {
         if (!heartBeatEndpoint.isEmpty()) {
-            logger.debug("Ping heart beat endpoint.");
+            logger.debug("Ping heart beat endpoint {}.", heartBeatEndpoint);
             ResponseEntity<String> response =
                     restTemplate.getForEntity(heartBeatEndpoint, String.class);
-            return response.getStatusCode() == HttpStatus.OK ? response.getBody() : null;
+            if (response.getStatusCode() != HttpStatus.OK) {
+                logger.warn(
+                        "Heart beat endpoint {} returned status {}.",
+                        heartBeatEndpoint,
+                        response.getStatusCode());
+            }
         }
-        return null;
     }
 }
