@@ -6,23 +6,22 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 @ExtendWith(MockitoExtension.class)
-public class MonitoringServiceTest {
+class MonitoringServiceTest {
 
-    private String heartBeatEndpoint = "http://localhost:8080";
+    private final String heartBeatEndpoint = "http://localhost:8080";
 
     @Mock private RestTemplate restTemplate;
 
     @InjectMocks private MonitoringService monitoringService;
 
     @Test
-    public void testMockWithOKResponse() {
+    void testMockWithOKResponse() {
         Mockito.when(restTemplate.getForEntity(heartBeatEndpoint, String.class))
-                .thenReturn(new ResponseEntity("OK", HttpStatus.OK));
+                .thenReturn(ResponseEntity.ok("OK"));
 
         // heartBeatEndpoint is null
         monitoringService.heartBeat();
@@ -37,9 +36,9 @@ public class MonitoringServiceTest {
     }
 
     @Test
-    public void testMockWithNotFoundResponse() {
+    void testMockWithNotFoundResponse() {
         Mockito.when(restTemplate.getForEntity(heartBeatEndpoint, String.class))
-                .thenReturn(new ResponseEntity("NOT_FOUND", HttpStatus.NOT_FOUND));
+                .thenReturn(ResponseEntity.notFound().build());
 
         // set heart beat endpoint to intended endpoint
         monitoringService.setHeartBeatEndpoint(heartBeatEndpoint);
