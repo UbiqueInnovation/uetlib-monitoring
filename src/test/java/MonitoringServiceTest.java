@@ -16,10 +16,11 @@ class MonitoringServiceTest {
 
     @Mock private RestTemplate restTemplate;
 
-    @InjectMocks private MonitoringService monitoringService;
+    private MonitoringService monitoringService;
 
     @Test
     void testMockWithOKResponse() {
+        monitoringService = new MonitoringService(restTemplate, null);
         Mockito.when(restTemplate.getForEntity(heartBeatEndpoint, String.class))
                 .thenReturn(ResponseEntity.ok("OK"));
 
@@ -29,7 +30,7 @@ class MonitoringServiceTest {
                 .getForEntity(heartBeatEndpoint, String.class);
 
         // set heart beat endpoint to intended endpoint
-        monitoringService.setHeartBeatEndpoint(heartBeatEndpoint);
+        monitoringService = new MonitoringService(restTemplate, heartBeatEndpoint);
         monitoringService.heartBeat();
         Mockito.verify(restTemplate, Mockito.times(1))
                 .getForEntity(heartBeatEndpoint, String.class);
@@ -41,7 +42,7 @@ class MonitoringServiceTest {
                 .thenReturn(ResponseEntity.notFound().build());
 
         // set heart beat endpoint to intended endpoint
-        monitoringService.setHeartBeatEndpoint(heartBeatEndpoint);
+        monitoringService = new MonitoringService(restTemplate, heartBeatEndpoint);
         monitoringService.heartBeat();
         Mockito.verify(restTemplate, Mockito.times(1))
                 .getForEntity(heartBeatEndpoint, String.class);
