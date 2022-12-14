@@ -11,21 +11,26 @@ public class MonitoringService {
     private static final Logger logger = LoggerFactory.getLogger(MonitoringService.class);
 
     private final RestTemplate restTemplate;
-    private final String heartBeatEndpoint;
+    private final boolean heartbeatEnabled;
+    private final String heartbeatEndpoint;
 
-    public MonitoringService(final RestTemplate restTemplate, final String heartBeatEndpoint) {
+    public MonitoringService(
+            final RestTemplate restTemplate,
+            final boolean heartbeatEnabled,
+            final String heartbeatEndpoint) {
         this.restTemplate = restTemplate;
-        this.heartBeatEndpoint = heartBeatEndpoint;
+        this.heartbeatEnabled = heartbeatEnabled;
+        this.heartbeatEndpoint = heartbeatEndpoint;
     }
 
-    public void heartBeat() {
-        if (StringUtils.isNotBlank(heartBeatEndpoint)) {
-            logger.debug("Ping heart beat endpoint {}.", heartBeatEndpoint);
-            final var response = restTemplate.getForEntity(heartBeatEndpoint, String.class);
+    public void heartbeat() {
+        if (heartbeatEnabled && StringUtils.isNotBlank(heartbeatEndpoint)) {
+            logger.debug("Ping heartbeat endpoint {}.", heartbeatEndpoint);
+            final var response = restTemplate.getForEntity(heartbeatEndpoint, String.class);
             if (response.getStatusCode() != HttpStatus.OK) {
                 logger.warn(
-                        "Heart beat endpoint {} returned status {}.",
-                        heartBeatEndpoint,
+                        "heartbeat endpoint {} returned status {}.",
+                        heartbeatEndpoint,
                         response.getStatusCode());
             }
         }
