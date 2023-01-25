@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping({"/check", "${ch.ubique.backend.job.check-endpoint:/check}"})
+@RequestMapping({"/check", "${ch.ubique.backend.monitoring.check-endpoint:/check}"})
 public class CheckController {
 
     @NotNull private final StatusCheckService statusCheckService;
