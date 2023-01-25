@@ -14,8 +14,8 @@ public class CheckController {
 
     @NotNull private final StatusCheckService statusCheckService;
 
-    public CheckController(@NotNull final StatusCheckService jobService) {
-        this.statusCheckService = jobService;
+    public CheckController(@NotNull final StatusCheckService statusCheckService) {
+        this.statusCheckService = statusCheckService;
     }
 
     @NotNull
