@@ -2,7 +2,9 @@ package ch.ubique.backend.monitoring.controller;
 
 import ch.ubique.backend.monitoring.check.StatusCheckService;
 import ch.ubique.backend.monitoring.check.models.CheckResults;
+
 import jakarta.validation.constraints.NotNull;
+
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

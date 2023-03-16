@@ -1,8 +1,10 @@
 package ch.ubique.backend.monitoring.check;
 
 import ch.ubique.backend.monitoring.check.models.CheckResults;
-import java.util.Collection;
+
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
 
 @Service
 public final class StatusCheckService {
