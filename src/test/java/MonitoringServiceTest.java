@@ -3,6 +3,7 @@ import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.when;
 
 import ch.ubique.backend.monitoring.service.MonitoringService;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

@@ -1,6 +1,7 @@
 package ch.ubique.backend.monitoring.check.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Collection;
 
 public record CheckResults(Collection<CheckResult> checks) {
