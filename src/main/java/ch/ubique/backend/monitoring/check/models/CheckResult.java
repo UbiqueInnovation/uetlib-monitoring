@@ -1,3 +1,6 @@
 package ch.ubique.backend.monitoring.check.models;
 
-public record CheckResult(Class<?> check, CheckStatus result) {}
+import jakarta.validation.constraints.NotNull;
+
+public record CheckResult(
+        @NotNull Class<?> check, @NotNull CheckLevel level, @NotNull CheckStatus result) {}
