@@ -1,15 +1,13 @@
 package ch.ubique.backend.monitoring.controller;
 
 import ch.ubique.backend.monitoring.check.StatusCheckService;
+import ch.ubique.backend.monitoring.check.models.CheckLevel;
 import ch.ubique.backend.monitoring.check.models.CheckResults;
 
 import jakarta.validation.constraints.NotNull;
 
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping({"/check", "${ch.ubique.backend.monitoring.check-endpoint:/check}"})
@@ -29,8 +27,9 @@ public class CheckController {
     }
 
     @NotNull
-    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public CheckResults check() {
-        return statusCheckService.checkAll();
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public CheckResults check(
+            @NotNull @RequestParam(defaultValue = "ERROR") final CheckLevel level) {
+        return statusCheckService.checkAll(level);
     }
 }
