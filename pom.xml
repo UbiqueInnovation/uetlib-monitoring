@@ -20,6 +20,13 @@
             <version>${project.version}</version>
         </dependency>
 
+        <!-- Used to read maven artifact versions, i.e. the version of the backend lib used -->
+        <dependency>
+            <groupId>de.westemeyer</groupId>
+            <artifactId>artifact-version-service</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
         <dependency>
             <groupId>ch.ubique</groupId>
             <artifactId>backend-jvm-lib-test</artifactId>
