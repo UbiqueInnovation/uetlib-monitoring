@@ -1,4 +1,4 @@
-package ch.ubique.backend.monitoring.models;
+package ch.ubique.backend.monitoring.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;

@@ -1,7 +1,7 @@
 package ch.ubique.backend.monitoring.service;
 
-import ch.ubique.backend.monitoring.models.Artifact;
-import ch.ubique.backend.monitoring.models.InfoResponse;
+import ch.ubique.backend.monitoring.model.Artifact;
+import ch.ubique.backend.monitoring.model.InfoResponse;
 
 import com.github.zafarkhaja.semver.Version;
 
