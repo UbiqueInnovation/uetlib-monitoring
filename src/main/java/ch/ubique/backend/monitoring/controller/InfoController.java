@@ -1,6 +1,6 @@
 package ch.ubique.backend.monitoring.controller;
 
-import ch.ubique.backend.monitoring.models.InfoResponse;
+import ch.ubique.backend.monitoring.model.InfoResponse;
 import ch.ubique.backend.monitoring.service.InfoService;
 
 import org.springframework.http.MediaType;
