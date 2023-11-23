@@ -9,16 +9,20 @@ import com.github.zafarkhaja.semver.Version;
 import de.westemeyer.version.service.ArtifactVersionCollector;
 
 import org.springframework.boot.info.BuildProperties;
+import org.springframework.boot.system.JavaVersion;
+import org.springframework.core.SpringVersion;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 public class InfoService {
 
     /**
      * When you add to this set, you *must* add the {@code artifact-version-maven-plugin} to that
-     * artifact's pom or parent pom. Check the usage in the parent pom: {@see backend-jvm-lib/pom.xml}
+     * artifact's pom or parent pom. Check the usage in the parent pom: {@see
+     * backend-jvm-lib/pom.xml}
      */
     private static final Set<ArtifactToFind> ARTIFACTS_TO_RETRIEVE =
             Set.of(
@@ -30,7 +34,7 @@ public class InfoService {
                     new ArtifactToFind(
                             "ch.sac.shared", "sac-backend-shared-service", "SAC Backend Shared"));
 
-    private static final List<Artifact> ARTIFACTS =
+    private static final Stream<Artifact> RETRIEVED_ARTIFACTS =
             ARTIFACTS_TO_RETRIEVE.stream()
                     .map(
                             artifact -> {
@@ -46,8 +50,21 @@ public class InfoService {
                     .filter(Objects::nonNull)
                     .sorted(
                             Comparator.comparing(Artifact::groupId)
-                                    .thenComparing(Artifact::artifactId))
-                    .toList();
+                                    .thenComparing(Artifact::artifactId));
+
+    private static final Stream<Artifact> ADDITIONAL_ARTIFACTS =
+            Optional.ofNullable(SpringVersion.getVersion())
+                    .map(
+                            version ->
+                                    new Artifact(
+                                            "org.springframework.boot",
+                                            "spring-boot",
+                                            "Spring Boot",
+                                            Version.valueOf(version)))
+                    .stream();
+
+    private static final List<Artifact> ARTIFACTS =
+            Stream.concat(RETRIEVED_ARTIFACTS, ADDITIONAL_ARTIFACTS).toList();
 
     private final BuildProperties buildProperties;
 
@@ -56,7 +73,8 @@ public class InfoService {
     }
 
     public InfoResponse getInfo() {
-        final var mavenVersion = Version.valueOf(buildProperties.getVersion());
-        return new InfoResponse(mavenVersion, ARTIFACTS);
+        final var javaVersion = JavaVersion.getJavaVersion();
+        final var projectVersion = Version.valueOf(buildProperties.getVersion());
+        return new InfoResponse(projectVersion, javaVersion, ARTIFACTS);
     }
 }
