@@ -1,5 +1,7 @@
 package ch.ubique.backend.monitoring.service;
 
+import static java.util.Objects.requireNonNull;
+
 import ch.ubique.backend.monitoring.model.Artifact;
 import ch.ubique.backend.monitoring.model.ArtifactToFind;
 import ch.ubique.backend.monitoring.model.InfoResponse;
@@ -8,9 +10,9 @@ import com.github.zafarkhaja.semver.Version;
 
 import de.westemeyer.version.service.ArtifactVersionCollector;
 
+import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.system.JavaVersion;
-import org.springframework.core.SpringVersion;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -53,15 +55,12 @@ public class InfoService {
                                     .thenComparing(Artifact::artifactId));
 
     private static final Stream<Artifact> ADDITIONAL_ARTIFACTS =
-            Optional.ofNullable(SpringVersion.getVersion())
-                    .map(
-                            version ->
-                                    new Artifact(
-                                            "org.springframework.boot",
-                                            "spring-boot",
-                                            "Spring Boot",
-                                            Version.valueOf(version)))
-                    .stream();
+            Stream.of(
+                    new Artifact(
+                            "org.springframework.boot",
+                            "spring-boot",
+                            "Spring Boot",
+                            Version.valueOf(requireNonNull(SpringBootVersion.getVersion()))));
 
     private static final List<Artifact> ARTIFACTS =
             Stream.concat(RETRIEVED_ARTIFACTS, ADDITIONAL_ARTIFACTS).toList();
