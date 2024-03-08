@@ -2,12 +2,11 @@ package ch.ubique.backend.monitoring.service;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -27,22 +26,19 @@ class MonitoringServiceTest {
                 .thenReturn(ResponseEntity.ok("OK"));
 
         // heartbeatEnabled is false
-        monitoringService = new MonitoringService(restTemplate, false, null);
+        monitoringService = new MonitoringService(restTemplate, null);
         monitoringService.heartbeat();
-        Mockito.verify(restTemplate, Mockito.times(0))
-                .getForEntity(heartbeatEndpoint, String.class);
+        verify(restTemplate, times(0)).getForEntity(heartbeatEndpoint, String.class);
 
         // heartbeatEndpoint is null
-        monitoringService = new MonitoringService(restTemplate, true, null);
+        monitoringService = new MonitoringService(restTemplate, " ");
         monitoringService.heartbeat();
-        Mockito.verify(restTemplate, Mockito.times(0))
-                .getForEntity(nullable(String.class), eq(String.class));
+        verify(restTemplate, times(0)).getForEntity(nullable(String.class), eq(String.class));
 
         // set heartbeat endpoint to intended endpoint
-        monitoringService = new MonitoringService(restTemplate, true, heartbeatEndpoint);
+        monitoringService = new MonitoringService(restTemplate, heartbeatEndpoint);
         monitoringService.heartbeat();
-        Mockito.verify(restTemplate, Mockito.times(1))
-                .getForEntity(nullable(String.class), eq(String.class));
+        verify(restTemplate, times(1)).getForEntity(nullable(String.class), eq(String.class));
     }
 
     @Test
@@ -51,9 +47,8 @@ class MonitoringServiceTest {
                 .thenReturn(ResponseEntity.notFound().build());
 
         // set heartbeat endpoint to intended endpoint
-        monitoringService = new MonitoringService(restTemplate, true, heartbeatEndpoint);
+        monitoringService = new MonitoringService(restTemplate, heartbeatEndpoint);
         monitoringService.heartbeat();
-        Mockito.verify(restTemplate, Mockito.times(1))
-                .getForEntity(heartbeatEndpoint, String.class);
+        verify(restTemplate, times(1)).getForEntity(heartbeatEndpoint, String.class);
     }
 }
