@@ -61,7 +61,7 @@ public class InfoService {
                             "org.springframework.boot",
                             "spring-boot",
                             "Spring Boot",
-                            Version.valueOf(requireNonNull(SpringBootVersion.getVersion()))));
+                            Version.parse(requireNonNull(SpringBootVersion.getVersion()))));
 
     private static final List<Artifact> ARTIFACTS =
             Stream.concat(RETRIEVED_ARTIFACTS, ADDITIONAL_ARTIFACTS).toList();
@@ -74,7 +74,7 @@ public class InfoService {
 
     public InfoResponse getInfo() {
         final var javaVersion = JavaVersion.getJavaVersion();
-        final var projectVersion = Version.valueOf(buildProperties.getVersion());
+        final var projectVersion = Version.parse(buildProperties.getVersion());
         return new InfoResponse(projectVersion, javaVersion, ARTIFACTS);
     }
 }

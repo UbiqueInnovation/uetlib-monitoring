@@ -15,6 +15,6 @@ public record Artifact(
     public static Artifact from(
             final de.westemeyer.version.model.Artifact a, final String artifactName) {
         return new Artifact(
-                a.getGroupId(), a.getArtifactId(), artifactName, Version.valueOf(a.getVersion()));
+                a.getGroupId(), a.getArtifactId(), artifactName, Version.parse(a.getVersion()));
     }
 }
