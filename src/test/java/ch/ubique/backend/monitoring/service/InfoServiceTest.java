@@ -3,6 +3,7 @@ package ch.ubique.backend.monitoring.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.github.zafarkhaja.semver.Version;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.system.JavaVersion;
