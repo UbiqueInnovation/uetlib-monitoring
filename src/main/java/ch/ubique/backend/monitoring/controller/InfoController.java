@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/info")
+@RequestMapping({"/v1/info", "${ch.ubique.backend.monitoring.info-endpoint:/v1/info}"})
 @CrossOrigin({
     "https://status.systems.ubique.ch",
     "https://status-dev.systems.ubique.ch",
