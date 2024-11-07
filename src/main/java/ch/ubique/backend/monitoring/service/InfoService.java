@@ -22,14 +22,14 @@ import java.util.stream.Stream;
 public class InfoService {
 
     /**
-     * When you add to this set, you <b>must</b> add the {@code artifact-version-maven-plugin} to that
-     * artifact's pom or parent pom. Check the usage in the parent pom: {@see
-     * backend-jvm-lib/pom.xml}
+     * When you add to this set, you <b>must</b> add the {@code artifact-version-maven-plugin} to
+     * that artifact's pom or parent pom. Check the usage in the pom: {@see pom.xml}
      */
     private static final Set<ArtifactToFind> ARTIFACTS_TO_RETRIEVE =
             Set.of(
-                    new ArtifactToFind("ch.ubique", "backend-jvm-lib-core", "Backend Lib"),
-                    new ArtifactToFind("ch.ubique.pushservice", "ub-pushconnector", "UB Pushconnector"),
+                    new ArtifactToFind("ch.ubique", "uetlib-core", "Uetlib"),
+                    new ArtifactToFind(
+                            "ch.ubique.pushservice", "ub-pushconnector", "UB Pushconnector"),
                     new ArtifactToFind(
                             "ch.admin.swisstopo.shared",
                             "swisstopo-backend-shared-service",
