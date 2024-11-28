@@ -36,6 +36,7 @@ class InfoServiceTest {
         final var expectedArtifacts =
                 Set.of(
                         Pair.of("ch.ubique", "uetlib-core"),
+                        Pair.of("ch.ubique", "uetlib-test"),
                         Pair.of("ch.ubique", "uetlib-spring-boot"),
                         Pair.of("org.springframework.boot", "spring-boot"));
         final var actualArtifacts =
