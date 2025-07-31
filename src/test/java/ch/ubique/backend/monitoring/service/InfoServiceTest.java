@@ -31,14 +31,14 @@ class InfoServiceTest {
         final var properties = new Properties();
         properties.setProperty("version", "2.3.1");
         final var infoService = new InfoService(new BuildProperties(properties));
-        infoService.resolveArtifacts();
 
         final var expectedArtifacts =
                 Set.of(
                         Pair.of("ch.ubique", "uetlib-core"),
                         Pair.of("ch.ubique", "uetlib-test"),
                         Pair.of("ch.ubique", "uetlib-spring-boot"),
-                        Pair.of("org.springframework.boot", "spring-boot"));
+                        Pair.of("org.springframework.boot", "spring-boot"),
+                        Pair.of("org.springframework", "spring-framework"));
         final var actualArtifacts =
                 infoService.getInfo().artifacts().stream()
                         .map(artifact -> Pair.of(artifact.groupId(), artifact.artifactId()))
