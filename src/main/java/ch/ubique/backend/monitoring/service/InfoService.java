@@ -48,10 +48,7 @@ public class InfoService {
 
     public InfoService(final BuildProperties buildProperties) {
         this.buildProperties = buildProperties;
-    }
 
-    @PostConstruct
-    void resolveArtifacts() {
         final var retrievedArtifacts =
                 ArtifactVersionCollector.collectArtifacts().stream()
                         .map(InfoService::mapArtifact)
