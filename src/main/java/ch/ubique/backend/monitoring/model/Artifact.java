@@ -1,5 +1,7 @@
 package ch.ubique.backend.monitoring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.github.zafarkhaja.semver.Version;
@@ -10,6 +12,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Comparator;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public record Artifact(
         @NotBlank String groupId,
         @NotBlank String artifactId,
