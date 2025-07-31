@@ -10,12 +10,11 @@ import com.github.zafarkhaja.semver.Version;
 
 import de.westemeyer.version.service.ArtifactVersionCollector;
 
-import jakarta.annotation.PostConstruct;
-
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.system.JavaVersion;
+import org.springframework.core.SpringVersion;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -30,17 +29,22 @@ import java.util.stream.Stream;
 @Service
 public class InfoService {
 
-    private static final Map<String, String> ARTIFACT_NAMES =
-            Map.ofEntries(
-                    Map.entry("ch.ubique.pushservice:ub-pushconnector", "UB Pushconnector"),
-                    Map.entry(
-                            "ch.admin.swisstopo.shared:swisstopo-backend-shared-service",
-                            "swisstopo Backend Shared"),
-                    Map.entry("ch.sac.shared:sac-backend-shared-service", "SAC Backend Shared"));
+    private static final Collection<Artifact> ADDITIONAL_ARTIFACTS =
+            List.of(
+                    new Artifact(
+                            "org.springframework.boot",
+                            "spring-boot",
+                            "Spring Boot",
+                            Version.parse(requireNonNull(SpringBootVersion.getVersion()))),
+                    new Artifact(
+                            "org.springframework",
+                            "spring-framework",
+                            "Spring Framework",
+                            Version.parse(requireNonNull(SpringVersion.getVersion()))));
 
     private final BuildProperties buildProperties;
 
-    private List<Artifact> artifacts = List.of();
+    private final List<Artifact> artifacts;
 
     public InfoService(final BuildProperties buildProperties) {
         this.buildProperties = buildProperties;
@@ -54,16 +58,12 @@ public class InfoService {
                         .sorted(
                                 Comparator.comparing(Artifact::groupId)
                                         .thenComparing(Artifact::artifactId));
-        artifacts = Stream.concat(retrievedArtifacts, ADDITIONAL_ARTIFACTS).toList();
+        artifacts = Stream.concat(retrievedArtifacts, ADDITIONAL_ARTIFACTS.stream()).toList();
     }
 
     private static @NotNull Artifact mapArtifact(
             final de.westemeyer.version.model.Artifact artifact) {
-        final var artifactName =
-                Optional.ofNullable(
-                                ARTIFACT_NAMES.get(
-                                        artifact.getGroupId() + ":" + artifact.getArtifactId()))
-                        .orElseGet(() -> kebabCaseToCapitalizedWords(artifact.getArtifactId()));
+        final var artifactName = kebabCaseToCapitalizedWords(artifact.getArtifactId());
         return Artifact.from(artifact, artifactName);
     }
 
@@ -72,14 +72,6 @@ public class InfoService {
                 .map(StringUtils::capitalize)
                 .collect(joining(" "));
     }
-
-    private static final Stream<Artifact> ADDITIONAL_ARTIFACTS =
-            Stream.of(
-                    new Artifact(
-                            "org.springframework.boot",
-                            "spring-boot",
-                            "Spring Boot",
-                            Version.parse(requireNonNull(SpringBootVersion.getVersion()))));
 
     public InfoResponse getInfo() {
         final var javaVersion = JavaVersion.getJavaVersion();
