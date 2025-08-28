@@ -34,12 +34,10 @@ public class InfoService {
                     new Artifact(
                             "org.springframework.boot",
                             "spring-boot",
-                            "Spring Boot",
                             Version.parse(requireNonNull(SpringBootVersion.getVersion()))),
                     new Artifact(
                             "org.springframework",
                             "spring-framework",
-                            "Spring Framework",
                             Version.parse(requireNonNull(SpringVersion.getVersion()))));
 
     private final BuildProperties buildProperties;
@@ -51,23 +49,11 @@ public class InfoService {
 
         final var retrievedArtifacts =
                 ArtifactVersionCollector.collectArtifacts().stream()
-                        .map(InfoService::mapArtifact)
+                        .map(Artifact::from)
                         .sorted(
                                 Comparator.comparing(Artifact::groupId)
                                         .thenComparing(Artifact::artifactId));
         artifacts = Stream.concat(retrievedArtifacts, ADDITIONAL_ARTIFACTS.stream()).toList();
-    }
-
-    private static @NotNull Artifact mapArtifact(
-            final de.westemeyer.version.model.Artifact artifact) {
-        final var artifactName = kebabCaseToCapitalizedWords(artifact.getArtifactId());
-        return Artifact.from(artifact, artifactName);
-    }
-
-    private static @NotNull String kebabCaseToCapitalizedWords(final String kebabCase) {
-        return Arrays.stream(kebabCase.split("-"))
-                .map(StringUtils::capitalize)
-                .collect(joining(" "));
     }
 
     public InfoResponse getInfo() {
