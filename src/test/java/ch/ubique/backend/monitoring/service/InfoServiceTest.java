@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.github.zafarkhaja.semver.Version;
 
+import kotlin.KotlinVersion;
+
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.info.BuildProperties;
@@ -20,9 +22,12 @@ class InfoServiceTest {
         final var properties = new Properties();
         properties.setProperty("version", "2.3.1");
         final var infoService = new InfoService(new BuildProperties(properties));
+
         assertEquals(
                 String.valueOf(Runtime.version().feature()),
                 infoService.getInfo().javaVersion().toString());
+        assertEquals(
+                KotlinVersion.CURRENT.toString(), infoService.getInfo().kotlinVersion().toString());
         assertEquals(Version.of(2, 3, 1), infoService.getInfo().projectVersion());
     }
 

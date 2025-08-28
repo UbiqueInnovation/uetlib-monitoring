@@ -1,23 +1,26 @@
 package ch.ubique.backend.monitoring.service;
 
 import static java.util.Objects.requireNonNull;
-import static java.util.stream.Collectors.joining;
 
+import ch.ubique.backend.core.utils.TimeUtils;
 import ch.ubique.backend.monitoring.model.Artifact;
 import ch.ubique.backend.monitoring.model.InfoResponse;
+import ch.ubique.backend.monitoring.model.SystemInfo;
 
 import com.github.zafarkhaja.semver.Version;
 
 import de.westemeyer.version.service.ArtifactVersionCollector;
 
-import org.jetbrains.annotations.NotNull;
+import kotlin.KotlinVersion;
+
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.system.JavaVersion;
 import org.springframework.core.SpringVersion;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
+import java.lang.management.ManagementFactory;
+import java.time.Duration;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -58,7 +61,13 @@ public class InfoService {
 
     public InfoResponse getInfo() {
         final var javaVersion = JavaVersion.getJavaVersion();
+        final var kotlinVersion = Version.parse(KotlinVersion.CURRENT.toString());
         final var projectVersion = Version.parse(buildProperties.getVersion());
-        return new InfoResponse(projectVersion, javaVersion, artifacts);
+
+        final var jvmUptime = Duration.ofMillis(ManagementFactory.getRuntimeMXBean().getUptime());
+        final var jvmStartTime = TimeUtils.TIME_UTILS_EUROPE_ZURICH.now().minus(jvmUptime);
+        final var systemInfo = new SystemInfo(jvmUptime, jvmStartTime);
+
+        return new InfoResponse(projectVersion, javaVersion, kotlinVersion, systemInfo, artifacts);
     }
 }
