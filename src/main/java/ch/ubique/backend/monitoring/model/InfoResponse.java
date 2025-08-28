@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.github.zafarkhaja.semver.Version;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
 import org.springframework.boot.system.JavaVersion;
@@ -16,6 +16,8 @@ import java.util.Collection;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record InfoResponse(
-        @JsonSerialize(using = ToStringSerializer.class) @NotBlank Version projectVersion,
-        @JsonSerialize(using = ToStringSerializer.class) @NotBlank JavaVersion javaVersion,
-        @NotNull Collection<Artifact> artifacts) {}
+        @JsonSerialize(using = ToStringSerializer.class) @NotNull @Valid Version projectVersion,
+        @JsonSerialize(using = ToStringSerializer.class) @NotNull @Valid JavaVersion javaVersion,
+        @JsonSerialize(using = ToStringSerializer.class) @NotNull @Valid Version kotlinVersion,
+        @NotNull @Valid SystemInfo systemInfo,
+        @NotNull @Valid Collection<Artifact> artifacts) {}
