@@ -19,5 +19,6 @@ public record InfoResponse(
         @JsonSerialize(using = ToStringSerializer.class) @NotNull @Valid Version projectVersion,
         @JsonSerialize(using = ToStringSerializer.class) @NotNull @Valid JavaVersion javaVersion,
         @JsonSerialize(using = ToStringSerializer.class) @NotNull @Valid Version kotlinVersion,
+        @NotNull @Valid Artifact whoami,
         @NotNull @Valid SystemInfo systemInfo,
         @NotNull @Valid Collection<Artifact> artifacts) {}

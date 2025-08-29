@@ -63,11 +63,14 @@ public class InfoService {
         final var javaVersion = JavaVersion.getJavaVersion();
         final var kotlinVersion = Version.parse(KotlinVersion.CURRENT.toString());
         final var projectVersion = Version.parse(buildProperties.getVersion());
+        final var whoami =
+                new Artifact(
+                        buildProperties.getGroup(), buildProperties.getArtifact(), projectVersion);
 
         final var jvmUptime = Duration.ofMillis(ManagementFactory.getRuntimeMXBean().getUptime());
         final var jvmStartTime = TimeUtils.TIME_UTILS_EUROPE_ZURICH.now().minus(jvmUptime);
         final var systemInfo = new SystemInfo(jvmUptime, jvmStartTime);
 
-        return new InfoResponse(projectVersion, javaVersion, kotlinVersion, systemInfo, artifacts);
+        return new InfoResponse(projectVersion, javaVersion, kotlinVersion, whoami, systemInfo, artifacts);
     }
 }
