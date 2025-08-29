@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.1.1
+## 1.1.2
 
 ### Improvements
 
@@ -9,6 +9,10 @@
 - Added `whoami` Artifact to info endpoint, to see project artifact.
 - Graceful handling of uncaught StatusCheck exceptions for check endpoint 
 
+## 1.1.1
+
+- Internal cleanup, removed PostConstruct
+ 
 ## 1.1.0
 
 ### Improvements
