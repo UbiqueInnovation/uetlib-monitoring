@@ -6,6 +6,8 @@
 
 - Add system info with `jvmUptime` and `jvmStartTime`
 - Add kotlin support and expose `kotlinVersion` like `javaVersion` in info endpoint
+- Added `whoami` Artifact to info endpoint, to see project artifact.
+- Graceful handling of uncaught StatusCheck exceptions for check endpoint 
 
 ## 1.1.0
 
