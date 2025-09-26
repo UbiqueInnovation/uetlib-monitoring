@@ -60,7 +60,7 @@ public class InfoService {
     }
 
     public InfoResponse getInfo() {
-        final var javaVersion = JavaVersion.getJavaVersion();
+        final var javaVersion = Version.parse(String.valueOf(Runtime.version().feature()), false);
         final var kotlinVersion = Version.parse(KotlinVersion.CURRENT.toString());
         final var projectVersion = Version.parse(buildProperties.getVersion());
         final var whoami =
