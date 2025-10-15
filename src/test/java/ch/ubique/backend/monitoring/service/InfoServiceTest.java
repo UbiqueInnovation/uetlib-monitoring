@@ -24,8 +24,7 @@ class InfoServiceTest {
         final var infoService = new InfoService(new BuildProperties(properties));
 
         assertEquals(
-                Version.parse(String.valueOf(Runtime.version().feature()), false),
-                infoService.getInfo().javaVersion());
+                String.valueOf(Runtime.version().feature()), infoService.getInfo().javaVersion());
         assertEquals(
                 Version.parse(String.valueOf(KotlinVersion.CURRENT)),
                 infoService.getInfo().kotlinVersion());

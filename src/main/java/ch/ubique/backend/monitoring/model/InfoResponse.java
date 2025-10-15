@@ -11,11 +11,22 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.Collection;
 
+/**
+ * Response for the info endpoint.
+ *
+ * @param projectVersion
+ * @param javaVersion Usually, only the major version. Expect a relaxed semver format, where both
+ *     minor and patch might be missing.
+ * @param kotlinVersion
+ * @param whoami
+ * @param systemInfo
+ * @param artifacts
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record InfoResponse(
         @JsonSerialize(using = ToStringSerializer.class) @NotNull @Valid Version projectVersion,
-        @JsonSerialize(using = ToStringSerializer.class) @NotNull @Valid Version javaVersion,
+        @NotNull @Valid String javaVersion,
         @JsonSerialize(using = ToStringSerializer.class) @NotNull @Valid Version kotlinVersion,
         @NotNull @Valid Artifact whoami,
         @NotNull @Valid SystemInfo systemInfo,
