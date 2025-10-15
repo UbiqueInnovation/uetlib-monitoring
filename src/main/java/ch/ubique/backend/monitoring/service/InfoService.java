@@ -15,7 +15,6 @@ import kotlin.KotlinVersion;
 
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.info.BuildProperties;
-import org.springframework.boot.system.JavaVersion;
 import org.springframework.core.SpringVersion;
 import org.springframework.stereotype.Service;
 
@@ -60,7 +59,7 @@ public class InfoService {
     }
 
     public InfoResponse getInfo() {
-        final var javaVersion = Version.parse(String.valueOf(Runtime.version().feature()), false);
+        final var javaVersion = String.valueOf(Runtime.version().feature());
         final var kotlinVersion = Version.parse(KotlinVersion.CURRENT.toString());
         final var projectVersion = Version.parse(buildProperties.getVersion());
         final var whoami =
@@ -71,6 +70,7 @@ public class InfoService {
         final var jvmStartTime = TimeUtils.TIME_UTILS_EUROPE_ZURICH.now().minus(jvmUptime);
         final var systemInfo = new SystemInfo(jvmUptime, jvmStartTime);
 
-        return new InfoResponse(projectVersion, javaVersion, kotlinVersion, whoami, systemInfo, artifacts);
+        return new InfoResponse(
+                projectVersion, javaVersion, kotlinVersion, whoami, systemInfo, artifacts);
     }
 }
