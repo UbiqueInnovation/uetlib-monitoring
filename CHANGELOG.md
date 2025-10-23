@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.2.0
+
+### Improvements
+
+- Add human readable HTML table response for /check endpoint
+
 ## 1.1.2
 
 ### Improvements

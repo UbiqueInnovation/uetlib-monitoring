@@ -1,6 +1,7 @@
 package ch.ubique.backend.monitoring.controller;
 
 import ch.ubique.backend.monitoring.check.StatusCheckService;
+import ch.ubique.backend.monitoring.check.converter.CheckResultsToHTMLConverter;
 import ch.ubique.backend.monitoring.check.models.CheckLevel;
 import ch.ubique.backend.monitoring.check.models.CheckResults;
 
@@ -21,9 +22,13 @@ import org.springframework.web.bind.annotation.*;
 public class CheckController {
 
     @NotNull private final StatusCheckService statusCheckService;
+    @NotNull private final CheckResultsToHTMLConverter checkResultsToHTMLConverter;
 
-    public CheckController(@NotNull final StatusCheckService statusCheckService) {
+    public CheckController(
+            @NotNull final StatusCheckService statusCheckService,
+            @NotNull final CheckResultsToHTMLConverter checkResultsToHTMLConverter) {
         this.statusCheckService = statusCheckService;
+        this.checkResultsToHTMLConverter = checkResultsToHTMLConverter;
     }
 
     @NotNull
@@ -31,5 +36,12 @@ public class CheckController {
     public CheckResults check(
             @NotNull @RequestParam(defaultValue = "ERROR") final CheckLevel level) {
         return statusCheckService.checkAll(level);
+    }
+
+    @NotNull
+    @GetMapping(produces = MediaType.TEXT_HTML_VALUE)
+    public String checkHtml(@NotNull @RequestParam(defaultValue = "ERROR") final CheckLevel level) {
+        var checkResults = statusCheckService.checkAll(level);
+        return checkResultsToHTMLConverter.convert(checkResults);
     }
 }
