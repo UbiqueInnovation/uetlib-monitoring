@@ -26,8 +26,12 @@ public class CheckResultsToHTMLConverter {
                 border-bottom: 2px solid black;
             }
             th, td {
-              text-align: left;
-              padding: 8px;
+                text-align: left;
+                vertical-align: top;
+                padding: 8px;
+            }
+            td pre {
+                white-space: pre-wrap;
             }
             tr.check-passed {
                 background-color: #1fb26d80;
@@ -108,16 +112,17 @@ public class CheckResultsToHTMLConverter {
         };
     }
 
-    private String checkFailureContext(CheckStatus status) {
+    private DomContent checkFailureContext(CheckStatus status) {
         return switch (status) {
-            case CheckPassed _s -> "";
+            case CheckPassed _s -> null;
             case CheckFailed failed -> {
                 try {
-                    yield objectMapper
-                            .writerWithDefaultPrettyPrinter()
-                            .writeValueAsString(failed.context());
+                    yield pre(
+                            objectMapper
+                                    .writerWithDefaultPrettyPrinter()
+                                    .writeValueAsString(failed.context()));
                 } catch (JsonProcessingException e) {
-                    yield String.valueOf(failed.context());
+                    yield pre(String.valueOf(failed.context()));
                 }
             }
         };
