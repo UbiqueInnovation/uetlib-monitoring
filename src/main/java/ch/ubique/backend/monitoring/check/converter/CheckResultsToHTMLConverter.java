@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import j2html.tags.DomContent;
 import j2html.tags.specialized.TableTag;
 
+import jakarta.validation.constraints.NotNull;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -137,20 +139,21 @@ public class CheckResultsToHTMLConverter {
                 results.checks().stream()
                         .filter(check -> check.result().passed())
                         .map(CheckResult::level)
-                        .min(CheckLevel::compareTo); // defined in order most to least severe
+                        .min(CheckLevel::compareTo) // defined in order most to least severe
+                        .orElse(CheckLevel.ERROR); // default level is ERROR
 
-        return checkClass(results.allPassed(), mostSevereFailedCheckLevel.orElse(null));
+        return checkClass(results.allPassed(), mostSevereFailedCheckLevel);
     }
 
-    private String checkClass(boolean passed, CheckLevel level) {
+    private String checkClass(boolean passed, @NotNull CheckLevel level) {
         if (passed) {
             return "check-passed";
-        } else {
-            return switch (level) {
-                case ERROR -> "check-error";
-                case WARNING -> "check-warning";
-                case INFO -> "check-info";
-            };
         }
+
+        return switch (level) {
+            case ERROR -> "check-error";
+            case WARNING -> "check-warning";
+            case INFO -> "check-info";
+        };
     }
 }
