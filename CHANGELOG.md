@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.2.1
+
+### Bugfixes
+
+- fix NPE in `CheckResultsToHTMLConverter` in the case when all checks fail
+
 ## 1.2.0
 
 ### Improvements
