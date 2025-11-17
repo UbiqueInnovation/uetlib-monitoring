@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.2.2
+
+### Bugfixes
+
+- Fix inverted filter condition for mostSeverFailedCheckLevel
+
 ## 1.2.1
 
 ### Bugfixes
