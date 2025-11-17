@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CheckResultsToHTMLConverter {
 
+    // language=JQuery-CSS
     private static final String STYLE =
             """
             table {
@@ -137,7 +138,7 @@ public class CheckResultsToHTMLConverter {
     private String allChecksTrClass(CheckResults results) {
         var mostSevereFailedCheckLevel =
                 results.checks().stream()
-                        .filter(check -> check.result().passed())
+                        .filter(check -> !check.result().passed())
                         .map(CheckResult::level)
                         .min(CheckLevel::compareTo) // defined in order most to least severe
                         .orElse(CheckLevel.ERROR); // default level is ERROR
