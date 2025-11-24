@@ -48,6 +48,32 @@ public class CheckResultsToHTMLConverter {
             tr.check-error {
                 background-color: #e6175c80;
             }
+
+            @media (max-width: 800px) {
+                thead {
+                    display: none;
+                }
+
+                tbody, tr, tfoot, td {
+                    display: block;
+                    width: 100%;
+                }
+
+                /* omit empty cells */
+                td:empty {
+                  display: none;
+                }
+
+                /* omit "OK" cell */
+                tr.check-passed td:nth-child(2) {
+                  display: none;
+                }
+
+                tr {
+                    margin-bottom: 3px;
+                    border-radius: 3px;
+                }
+            }
             """;
 
     private final ObjectMapper objectMapper;
@@ -57,7 +83,8 @@ public class CheckResultsToHTMLConverter {
     }
 
     public String convert(CheckResults results) {
-        return html(
+        return document(
+                html(
                         head(
                                 title("Checks"),
                                 meta().withName("viewport")
@@ -66,8 +93,7 @@ public class CheckResultsToHTMLConverter {
                                                 "width=device-width, initial-scale=1, shrink=1"),
                                 meta().withCharset("utf-8"),
                                 style(STYLE)),
-                        body(buildTable(results), resultsAsJsonScript(results)))
-                .render();
+                        body(buildTable(results), resultsAsJsonScript(results))));
     }
 
     // Include results as json. Ensures that simple string matches that expect the json document
