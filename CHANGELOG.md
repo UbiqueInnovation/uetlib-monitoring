@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.2.3
+
+### Bugfixes
+
+- More mobile friendly style for HTML in /check endpoint
+
 ## 1.2.2
 
 ### Bugfixes
