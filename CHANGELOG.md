@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.0.0
+
+### Improvements
+
+- Support for Spring Boot 4.0
+
 ## 1.2.3
 
 ### Bugfixes
@@ -22,7 +28,7 @@
 
 ### Improvements
 
-- Add human readable HTML table response for /check endpoint
+- Add human-readable HTML table response for /check endpoint
 
 ## 1.1.2
 
@@ -31,12 +37,12 @@
 - Add system info with `jvmUptime` and `jvmStartTime`
 - Add kotlin support and expose `kotlinVersion` like `javaVersion` in info endpoint
 - Added `whoami` Artifact to info endpoint, to see project artifact.
-- Graceful handling of uncaught StatusCheck exceptions for check endpoint 
+- Graceful handling of uncaught StatusCheck exceptions for check endpoint
 
 ## 1.1.1
 
 - Internal cleanup, removed PostConstruct
- 
+
 ## 1.1.0
 
 ### Improvements
