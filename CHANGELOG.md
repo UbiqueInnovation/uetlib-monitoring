@@ -5,6 +5,7 @@
 ### Improvements
 
 - Support for Spring Boot 4.0
+- Use `RestClient` instead of `RestTemplate` in `MonitoringService`
 
 ## 1.2.3
 
