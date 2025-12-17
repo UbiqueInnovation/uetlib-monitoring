@@ -4,12 +4,16 @@ import ch.ubique.backend.monitoring.check.StatusCheckService;
 import ch.ubique.backend.monitoring.check.converter.CheckResultsToHTMLConverter;
 import ch.ubique.backend.monitoring.check.models.CheckLevel;
 import ch.ubique.backend.monitoring.check.models.CheckResults;
+import ch.ubique.backend.spring.validation.ValidateResponse;
 
 import jakarta.validation.constraints.NotNull;
 
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+@Validated
+@ValidateResponse
 @RestController
 @RequestMapping({"/check", "${ch.ubique.backend.monitoring.check-endpoint:/check}"})
 @CrossOrigin(
