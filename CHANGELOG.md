@@ -1,10 +1,21 @@
 # CHANGELOG
 
+## 1.3.0
+
+### Improvements
+
+- Add response validation to `InfoController` and `CheckController`. Configurable via
+  ```properties
+  ch.ubique.backend.spring.validation.response.fail.action=throw
+  ch.ubique.backend.spring.validation.response.fail.log-level=error
+  ```
+  Defaults to `log` and `warn`, respectively.
+
 ## 1.2.3
 
 ### Bugfixes
 
-- More mobile friendly style for HTML in /check endpoint
+- More mobile-friendly style for HTML in /check endpoint
 
 ## 1.2.2
 
@@ -22,7 +33,7 @@
 
 ### Improvements
 
-- Add human readable HTML table response for /check endpoint
+- Add human-readable HTML table response for /check endpoint
 
 ## 1.1.2
 
