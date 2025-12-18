@@ -7,11 +7,22 @@
 - Support for Spring Boot 4.0
 - Use `RestClient` instead of `RestTemplate` in `MonitoringService`
 
+## 1.3.0
+
+### Improvements
+
+- Add response validation to `InfoController` and `CheckController`. Configurable via
+  ```properties
+  ch.ubique.backend.spring.validation.response.fail.action=throw
+  ch.ubique.backend.spring.validation.response.fail.log-level=error
+  ```
+  Defaults to `log` and `warn`, respectively.
+
 ## 1.2.3
 
 ### Bugfixes
 
-- More mobile friendly style for HTML in /check endpoint
+- More mobile-friendly style for HTML in /check endpoint
 
 ## 1.2.2
 

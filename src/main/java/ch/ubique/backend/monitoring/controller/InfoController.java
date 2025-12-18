@@ -2,10 +2,14 @@ package ch.ubique.backend.monitoring.controller;
 
 import ch.ubique.backend.monitoring.model.InfoResponse;
 import ch.ubique.backend.monitoring.service.InfoService;
+import ch.ubique.backend.spring.validation.ValidateResponse;
 
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+@Validated
+@ValidateResponse
 @RestController
 @RequestMapping({"/v1/info", "${ch.ubique.backend.monitoring.info-endpoint:/v1/info}"})
 @CrossOrigin({
