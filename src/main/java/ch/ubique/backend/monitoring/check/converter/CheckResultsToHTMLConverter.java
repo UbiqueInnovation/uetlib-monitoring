@@ -4,15 +4,15 @@ import static j2html.TagCreator.*;
 
 import ch.ubique.backend.monitoring.check.models.*;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import j2html.tags.DomContent;
 import j2html.tags.specialized.TableTag;
 
 import jakarta.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
+
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 @Component
 public class CheckResultsToHTMLConverter {
@@ -103,7 +103,7 @@ public class CheckResultsToHTMLConverter {
             return script(objectMapper.writeValueAsString(results))
                     .withId("data")
                     .withType("application/json");
-        } catch (JsonProcessingException e) {
+        } catch (JacksonException e) {
             return null;
         }
     }
@@ -150,7 +150,7 @@ public class CheckResultsToHTMLConverter {
                             objectMapper
                                     .writerWithDefaultPrettyPrinter()
                                     .writeValueAsString(failed.context()));
-                } catch (JsonProcessingException e) {
+                } catch (JacksonException e) {
                     yield pre(String.valueOf(failed.context()));
                 }
             }
