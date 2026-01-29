@@ -3,7 +3,6 @@ package ch.ubique.backend.monitoring.check;
 import static ch.ubique.backend.core.utils.StringUtils.requireNonBlankElse;
 
 import ch.ubique.backend.core.executor.VirtualThreadUtils;
-import ch.ubique.backend.core.utils.StringUtils;
 import ch.ubique.backend.monitoring.check.models.CheckFailed;
 import ch.ubique.backend.monitoring.check.models.CheckLevel;
 import ch.ubique.backend.monitoring.check.models.CheckResult;
@@ -11,13 +10,13 @@ import ch.ubique.backend.monitoring.check.models.CheckResults;
 
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Map;
 
 @Service
 public final class StatusCheckService {

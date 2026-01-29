@@ -45,7 +45,7 @@ public class CheckController {
     @NotNull
     @GetMapping(produces = MediaType.TEXT_HTML_VALUE)
     public String checkHtml(@NotNull @RequestParam(defaultValue = "ERROR") final CheckLevel level) {
-        var checkResults = statusCheckService.checkAll(level);
+        final var checkResults = statusCheckService.checkAll(level);
         return checkResultsToHTMLConverter.convert(checkResults);
     }
 }
