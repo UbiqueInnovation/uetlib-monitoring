@@ -7,36 +7,42 @@
     <parent>
         <groupId>ch.ubique</groupId>
         <artifactId>uetlib-parent</artifactId>
-        <version>2026.0.0-alpha.5</version>
+        <version>2026.0.0-alpha.6</version>
     </parent>
 
     <artifactId>uetlib-monitoring</artifactId>
     <version>2.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <properties>
+        <uetlib-core.version>2.0.0-alpha.17</uetlib-core.version>
+        <uetlib-spring-boot.version>2.0.0-alpha.35</uetlib-spring-boot.version>
+        <uetlib-test.version>2.0.0-alpha.3</uetlib-test.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>ch.ubique</groupId>
             <artifactId>uetlib-core</artifactId>
-            <version>2.0.0-alpha.5</version>
+            <version>${uetlib-core.version}</version>
         </dependency>
 
         <dependency>
             <groupId>ch.ubique</groupId>
             <artifactId>uetlib-spring-boot</artifactId>
-            <version>2.0.0-alpha.3</version>
+            <version>${uetlib-spring-boot.version}</version>
         </dependency>
 
         <dependency>
             <groupId>ch.ubique</groupId>
             <artifactId>uetlib-spring-boot-validation</artifactId>
-            <version>2.0.0-alpha.4</version>
+            <version>${uetlib-spring-boot.version}</version>
         </dependency>
 
         <dependency>
             <groupId>ch.ubique</groupId>
             <artifactId>uetlib-test</artifactId>
-            <version>2.0.0-alpha.3</version>
+            <version>${uetlib-test.version}</version>
             <scope>test</scope>
         </dependency>
 
