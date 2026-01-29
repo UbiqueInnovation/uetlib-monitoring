@@ -31,16 +31,16 @@ import java.util.stream.Stream;
 @Service
 public class InfoService {
 
+    private static final Version SPRING_BOOT_VERSION =
+            Version.parse(requireNonNull(SpringBootVersion.getVersion()));
+    private static final Version SPRING_FRAMEWORK_VERSION =
+            Version.parse(requireNonNull(SpringVersion.getVersion()));
+
     private static final Collection<Artifact> ADDITIONAL_ARTIFACTS =
             List.of(
+                    new Artifact("org.springframework.boot", "spring-boot", SPRING_BOOT_VERSION),
                     new Artifact(
-                            "org.springframework.boot",
-                            "spring-boot",
-                            Version.parse(requireNonNull(SpringBootVersion.getVersion()))),
-                    new Artifact(
-                            "org.springframework",
-                            "spring-framework",
-                            Version.parse(requireNonNull(SpringVersion.getVersion()))));
+                            "org.springframework", "spring-framework", SPRING_FRAMEWORK_VERSION));
 
     private final BuildProperties buildProperties;
 
@@ -61,7 +61,7 @@ public class InfoService {
     public InfoResponse getInfo() {
         final var javaVersion = String.valueOf(Runtime.version().feature());
         final var kotlinVersion = Version.parse(KotlinVersion.CURRENT.toString());
-        final var projectVersion = Version.parse(buildProperties.getVersion());
+        final var projectVersion = Version.parse(requireNonNull(buildProperties.getVersion()));
         final var whoami =
                 new Artifact(
                         buildProperties.getGroup(), buildProperties.getArtifact(), projectVersion);
@@ -71,6 +71,13 @@ public class InfoService {
         final var systemInfo = new SystemInfo(jvmUptime, jvmStartTime);
 
         return new InfoResponse(
-                projectVersion, javaVersion, kotlinVersion, whoami, systemInfo, artifacts);
+                projectVersion,
+                javaVersion,
+                kotlinVersion,
+                SPRING_BOOT_VERSION,
+                SPRING_FRAMEWORK_VERSION,
+                whoami,
+                systemInfo,
+                artifacts);
     }
 }
