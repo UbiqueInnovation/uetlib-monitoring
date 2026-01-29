@@ -78,11 +78,11 @@ public class CheckResultsToHTMLConverter {
 
     private final ObjectMapper objectMapper;
 
-    public CheckResultsToHTMLConverter(ObjectMapper objectMapper) {
+    public CheckResultsToHTMLConverter(final ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
-    public String convert(CheckResults results) {
+    public String convert(final CheckResults results) {
         return document(
                 html(
                         head(
@@ -98,17 +98,17 @@ public class CheckResultsToHTMLConverter {
 
     // Include results as json. Ensures that simple string matches that expect the json document
     // will work even if they get this HTML page instead.
-    private DomContent resultsAsJsonScript(CheckResults results) {
+    private DomContent resultsAsJsonScript(final CheckResults results) {
         try {
             return script(objectMapper.writeValueAsString(results))
                     .withId("data")
                     .withType("application/json");
-        } catch (JacksonException e) {
+        } catch (final JacksonException e) {
             return null;
         }
     }
 
-    private TableTag buildTable(CheckResults results) {
+    private TableTag buildTable(final CheckResults results) {
         return table(
                 thead(
                         tr(
@@ -134,35 +134,35 @@ public class CheckResultsToHTMLConverter {
                                 .withClass(allChecksTrClass(results))));
     }
 
-    private String checkFailureReason(CheckStatus status) {
+    private String checkFailureReason(final CheckStatus status) {
         return switch (status) {
-            case CheckPassed _s -> "";
-            case CheckFailed failed -> failed.reason();
+            case final CheckPassed _s -> "";
+            case final CheckFailed failed -> failed.reason();
         };
     }
 
-    private DomContent checkFailureContext(CheckStatus status) {
+    private DomContent checkFailureContext(final CheckStatus status) {
         return switch (status) {
-            case CheckPassed _s -> null;
-            case CheckFailed failed -> {
+            case final CheckPassed _s -> null;
+            case final CheckFailed failed -> {
                 try {
                     yield pre(
                             objectMapper
                                     .writerWithDefaultPrettyPrinter()
                                     .writeValueAsString(failed.context()));
-                } catch (JacksonException e) {
+                } catch (final JacksonException e) {
                     yield pre(String.valueOf(failed.context()));
                 }
             }
         };
     }
 
-    private String checkTrClass(CheckResult check) {
+    private String checkTrClass(final CheckResult check) {
         return checkClass(check.result().passed(), check.level());
     }
 
-    private String allChecksTrClass(CheckResults results) {
-        var mostSevereFailedCheckLevel =
+    private String allChecksTrClass(final CheckResults results) {
+        final var mostSevereFailedCheckLevel =
                 results.checks().stream()
                         .filter(check -> !check.result().passed())
                         .map(CheckResult::level)
@@ -172,7 +172,7 @@ public class CheckResultsToHTMLConverter {
         return checkClass(results.allPassed(), mostSevereFailedCheckLevel);
     }
 
-    private String checkClass(boolean passed, @NotNull CheckLevel level) {
+    private String checkClass(final boolean passed, @NotNull final CheckLevel level) {
         if (passed) {
             return "check-passed";
         }
