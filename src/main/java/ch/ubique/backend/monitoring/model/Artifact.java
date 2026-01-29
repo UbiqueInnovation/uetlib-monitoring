@@ -8,17 +8,14 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import tools.jackson.databind.annotation.JsonSerialize;
-import tools.jackson.databind.ser.std.ToStringSerializer;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Comparator;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record Artifact(
-        @NotBlank String groupId,
-        @NotBlank String artifactId,
-        @JsonSerialize(using = ToStringSerializer.class) @NotNull @Valid Version version)
+        @NotBlank String groupId, @NotBlank String artifactId, @NotNull @Valid Version version)
         implements Comparable<Artifact> {
 
     private static final Comparator<Artifact> ARTIFACT_COMPARATOR =
@@ -35,7 +32,7 @@ public record Artifact(
     }
 
     @Override
-    public int compareTo(@NotNull final Artifact o) {
+    public int compareTo(final @NonNull Artifact o) {
         return ARTIFACT_COMPARATOR.compare(this, o);
     }
 }
