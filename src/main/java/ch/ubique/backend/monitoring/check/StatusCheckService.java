@@ -10,6 +10,7 @@ import ch.ubique.backend.monitoring.check.models.CheckResults;
 
 import jakarta.validation.constraints.NotNull;
 
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -29,12 +30,18 @@ public final class StatusCheckService {
         this.checks = checks;
     }
 
-    public CheckResults checkAll(final @NotNull CheckLevel checkLevel) {
-        return new CheckResults(
-                VirtualThreadUtils.mapAll(this::runCheck, checks).stream()
+    public CheckResults checkAll(
+            final @NotNull CheckLevel checkLevel, final @Nullable String checkClassName) {
+        final var filteredChecks =
+                checkClassName == null
+                        ? checks.stream()
+                        : checks.stream().filter(check -> check.checkName().equals(checkClassName));
+        final var results =
+                VirtualThreadUtils.mapAll(this::runCheck, filteredChecks)
                         .filter(result -> result.level().isSameOrMoreSevereThan(checkLevel))
                         .sorted(Comparator.comparing(result -> result.check().getCanonicalName()))
-                        .toList());
+                        .toList();
+        return new CheckResults(results);
     }
 
     private CheckResult runCheck(final @NotNull StatusCheck check) {
