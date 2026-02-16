@@ -1,5 +1,6 @@
 package ch.ubique.backend.monitoring.controller;
 
+import ch.ubique.backend.core.validator.NullOrNotBlank;
 import ch.ubique.backend.monitoring.check.StatusCheckService;
 import ch.ubique.backend.monitoring.check.converter.CheckResultsToHTMLConverter;
 import ch.ubique.backend.monitoring.check.models.CheckLevel;
@@ -38,14 +39,17 @@ public class CheckController {
     @NotNull
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public CheckResults check(
-            @NotNull @RequestParam(defaultValue = "ERROR") final CheckLevel level) {
-        return statusCheckService.checkAll(level);
+            @NotNull @RequestParam(defaultValue = "ERROR") final CheckLevel level,
+            @NullOrNotBlank @RequestParam("check") final String checkClassName) {
+        return statusCheckService.checkAll(level, checkClassName);
     }
 
     @NotNull
     @GetMapping(produces = MediaType.TEXT_HTML_VALUE)
-    public String checkHtml(@NotNull @RequestParam(defaultValue = "ERROR") final CheckLevel level) {
-        final var checkResults = statusCheckService.checkAll(level);
+    public String checkHtml(
+            @NotNull @RequestParam(defaultValue = "ERROR") final CheckLevel level,
+            @NullOrNotBlank @RequestParam("check") final String checkClassName) {
+        final var checkResults = statusCheckService.checkAll(level, checkClassName);
         return checkResultsToHTMLConverter.convert(checkResults);
     }
 }

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.3.0
+
+### Improvements
+
+- Add new parameter `check` to `/check` endpoint to run only checks with given class name
+
 ## 2.2.0
 
 - Drop `uetlib-spring-boot-validation` in favor of `uetlib-spring-boot@v2.1.0`
