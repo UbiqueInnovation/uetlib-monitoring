@@ -15,8 +15,8 @@
     <packaging>jar</packaging>
 
     <properties>
-        <uetlib-core.version>2.0.0</uetlib-core.version>
-        <uetlib-spring-boot.version>2.0.1</uetlib-spring-boot.version>
+        <uetlib-core.version>2.0.1</uetlib-core.version>
+        <uetlib-spring-boot.version>2.0.2</uetlib-spring-boot.version>
         <uetlib-test.version>2.0.0</uetlib-test.version>
     </properties>
 
