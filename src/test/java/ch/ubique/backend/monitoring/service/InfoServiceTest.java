@@ -13,7 +13,6 @@ import org.springframework.boot.info.BuildProperties;
 
 import java.util.Properties;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 class InfoServiceTest {
@@ -36,6 +35,7 @@ class InfoServiceTest {
 
         final var expectedArtifacts =
                 Set.of(
+                        Pair.of("de.westemeyer", "artifact-version-service"),
                         Pair.of("ch.ubique", "uetlib-core"),
                         Pair.of("ch.ubique", "uetlib-test"),
                         Pair.of("ch.ubique", "uetlib-spring-boot"),
@@ -49,9 +49,9 @@ class InfoServiceTest {
                         // the tests are run from the cli
                         .filter(
                                 artifact ->
-                                        !Pair.of("ch.ubique", "uetlib-monitoring").equals(artifact))
+                                        !artifact.equals(Pair.of("ch.ubique", "uetlib-monitoring")))
                         .collect(Collectors.toSet());
-        assertEquals(new TreeSet<>(expectedArtifacts), new TreeSet<>(actualArtifacts));
+        assertEquals(expectedArtifacts, actualArtifacts);
     }
 
     private static @NonNull InfoService mockInfoService() {
