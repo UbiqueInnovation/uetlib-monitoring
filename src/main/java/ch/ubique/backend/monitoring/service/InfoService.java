@@ -1,27 +1,24 @@
 package ch.ubique.backend.monitoring.service;
 
+import static ch.ubique.backend.monitoring.service.VersionService.SPRING_BOOT_VERSION;
+import static ch.ubique.backend.monitoring.service.VersionService.SPRING_FRAMEWORK_VERSION;
+
 import static java.util.Objects.requireNonNull;
 
 import ch.ubique.backend.core.utils.TimeUtils;
-import ch.ubique.backend.monitoring.model.Artifact;
-import ch.ubique.backend.monitoring.model.InfoResponse;
-import ch.ubique.backend.monitoring.model.SystemInfo;
+import ch.ubique.backend.monitoring.info.model.InfoResponse;
+import ch.ubique.backend.monitoring.info.model.MonitoringArtifact;
+import ch.ubique.backend.monitoring.info.model.SystemInfo;
 
 import com.github.zafarkhaja.semver.Version;
 
-import de.westemeyer.version.service.ArtifactVersionCollector;
-
 import kotlin.KotlinVersion;
 
-import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.info.BuildProperties;
-import org.springframework.core.SpringVersion;
 import org.springframework.stereotype.Service;
 
 import java.lang.management.ManagementFactory;
 import java.time.Duration;
-import java.util.*;
-import java.util.stream.Stream;
 
 /**
  * All projects that you want to see the version of <b>must</b> add the {@code
@@ -31,31 +28,12 @@ import java.util.stream.Stream;
 @Service
 public class InfoService {
 
-    private static final Version SPRING_BOOT_VERSION =
-            Version.parse(requireNonNull(SpringBootVersion.getVersion()));
-    private static final Version SPRING_FRAMEWORK_VERSION =
-            Version.parse(requireNonNull(SpringVersion.getVersion()));
-
-    private static final Collection<Artifact> ADDITIONAL_ARTIFACTS =
-            List.of(
-                    new Artifact("org.springframework.boot", "spring-boot", SPRING_BOOT_VERSION),
-                    new Artifact(
-                            "org.springframework", "spring-framework", SPRING_FRAMEWORK_VERSION));
-
+    private final VersionService versionService;
     private final BuildProperties buildProperties;
 
-    private final List<Artifact> artifacts;
-
-    public InfoService(final BuildProperties buildProperties) {
+    public InfoService(final VersionService versionService, final BuildProperties buildProperties) {
+        this.versionService = versionService;
         this.buildProperties = buildProperties;
-
-        final var retrievedArtifacts =
-                ArtifactVersionCollector.collectArtifacts().stream()
-                        .map(Artifact::from)
-                        .sorted(
-                                Comparator.comparing(Artifact::groupId)
-                                        .thenComparing(Artifact::artifactId));
-        artifacts = Stream.concat(retrievedArtifacts, ADDITIONAL_ARTIFACTS.stream()).toList();
     }
 
     public InfoResponse getInfo() {
@@ -63,12 +41,14 @@ public class InfoService {
         final var kotlinVersion = Version.parse(KotlinVersion.CURRENT.toString());
         final var projectVersion = Version.parse(requireNonNull(buildProperties.getVersion()));
         final var whoami =
-                new Artifact(
+                new MonitoringArtifact(
                         buildProperties.getGroup(), buildProperties.getArtifact(), projectVersion);
 
         final var jvmUptime = Duration.ofMillis(ManagementFactory.getRuntimeMXBean().getUptime());
         final var jvmStartTime = TimeUtils.TIME_UTILS_EUROPE_ZURICH.now().minus(jvmUptime);
         final var systemInfo = new SystemInfo(jvmUptime, jvmStartTime);
+
+        final var artifacts = versionService.collectedArtifacts();
 
         return new InfoResponse(
                 projectVersion,

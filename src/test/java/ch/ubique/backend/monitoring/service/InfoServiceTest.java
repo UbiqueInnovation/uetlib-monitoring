@@ -7,6 +7,7 @@ import com.github.zafarkhaja.semver.Version;
 import kotlin.KotlinVersion;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.jspecify.annotations.NonNull;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.info.BuildProperties;
 
@@ -19,9 +20,7 @@ class InfoServiceTest {
 
     @Test
     void testInfoResponse() {
-        final var properties = new Properties();
-        properties.setProperty("version", "2.3.1");
-        final var infoService = new InfoService(new BuildProperties(properties));
+        final var infoService = mockInfoService();
 
         assertEquals(
                 String.valueOf(Runtime.version().feature()), infoService.getInfo().javaVersion());
@@ -33,9 +32,7 @@ class InfoServiceTest {
 
     @Test
     void testResolveArtifacts() {
-        final var properties = new Properties();
-        properties.setProperty("version", "2.3.1");
-        final var infoService = new InfoService(new BuildProperties(properties));
+        final var infoService = mockInfoService();
 
         final var expectedArtifacts =
                 Set.of(
@@ -55,5 +52,11 @@ class InfoServiceTest {
                                         !Pair.of("ch.ubique", "uetlib-monitoring").equals(artifact))
                         .collect(Collectors.toSet());
         assertEquals(new TreeSet<>(expectedArtifacts), new TreeSet<>(actualArtifacts));
+    }
+
+    private static @NonNull InfoService mockInfoService() {
+        final var properties = new Properties();
+        properties.setProperty("version", "2.3.1");
+        return new InfoService(new VersionService(), new BuildProperties(properties));
     }
 }
