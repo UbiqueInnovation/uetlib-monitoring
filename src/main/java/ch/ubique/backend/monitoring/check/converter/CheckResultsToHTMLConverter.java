@@ -2,7 +2,7 @@ package ch.ubique.backend.monitoring.check.converter;
 
 import static j2html.TagCreator.*;
 
-import ch.ubique.backend.monitoring.check.model.*;
+import ch.ubique.backend.monitoring.check.models.*;
 
 import j2html.tags.DomContent;
 import j2html.tags.specialized.TableTag;

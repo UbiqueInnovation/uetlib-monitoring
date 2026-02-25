@@ -2,8 +2,8 @@ package ch.ubique.backend.monitoring.controller;
 
 import ch.ubique.backend.monitoring.check.StatusCheckService;
 import ch.ubique.backend.monitoring.check.converter.CheckResultsToHTMLConverter;
-import ch.ubique.backend.monitoring.check.model.CheckLevel;
-import ch.ubique.backend.monitoring.check.model.CheckResults;
+import ch.ubique.backend.monitoring.check.models.CheckLevel;
+import ch.ubique.backend.monitoring.check.models.CheckResults;
 import ch.ubique.backend.spring.validation.ValidateResponse;
 
 import jakarta.validation.constraints.NotNull;

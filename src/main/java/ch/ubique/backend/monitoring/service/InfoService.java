@@ -6,9 +6,9 @@ import static ch.ubique.backend.monitoring.service.VersionService.SPRING_FRAMEWO
 import static java.util.Objects.requireNonNull;
 
 import ch.ubique.backend.core.utils.TimeUtils;
-import ch.ubique.backend.monitoring.info.model.InfoResponse;
-import ch.ubique.backend.monitoring.info.model.MonitoringArtifact;
-import ch.ubique.backend.monitoring.info.model.SystemInfo;
+import ch.ubique.backend.monitoring.model.InfoResponse;
+import ch.ubique.backend.monitoring.model.Artifact;
+import ch.ubique.backend.monitoring.model.SystemInfo;
 
 import com.github.zafarkhaja.semver.Version;
 
@@ -41,7 +41,7 @@ public class InfoService {
         final var kotlinVersion = Version.parse(KotlinVersion.CURRENT.toString());
         final var projectVersion = Version.parse(requireNonNull(buildProperties.getVersion()));
         final var whoami =
-                new MonitoringArtifact(
+                new Artifact(
                         buildProperties.getGroup(), buildProperties.getArtifact(), projectVersion);
 
         final var jvmUptime = Duration.ofMillis(ManagementFactory.getRuntimeMXBean().getUptime());
