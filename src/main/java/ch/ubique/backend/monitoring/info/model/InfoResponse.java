@@ -1,4 +1,4 @@
-package ch.ubique.backend.monitoring.model;
+package ch.ubique.backend.monitoring.info.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -30,6 +30,6 @@ public record InfoResponse(
         @NotNull @Valid Version kotlinVersion,
         @NotNull @Valid Version springBootVersion,
         @NotNull @Valid Version springFrameworkVersion,
-        @NotNull @Valid Artifact whoami,
+        @NotNull @Valid MonitoringArtifact whoami,
         @NotNull @Valid SystemInfo systemInfo,
-        @NotNull @Valid Collection<Artifact> artifacts) {}
+        @NotNull @Valid Collection<MonitoringArtifact> artifacts) {}

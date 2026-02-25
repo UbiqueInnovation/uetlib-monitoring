@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.1.0
+
+- Adapt `MonitoringService` to `de:westemeyer:artifact-version-service/maven-plugin:2.0.0`
+- Add new autoconfiguration for this package: `ch.ubique.backend.monitoring` can be safely removed from component scan
+  in projects.
+
 ## 2.0.0
 
 ### Improvements
