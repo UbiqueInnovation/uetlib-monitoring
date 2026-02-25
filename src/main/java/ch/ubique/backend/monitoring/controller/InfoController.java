@@ -1,6 +1,6 @@
 package ch.ubique.backend.monitoring.controller;
 
-import ch.ubique.backend.monitoring.info.model.InfoResponse;
+import ch.ubique.backend.monitoring.model.InfoResponse;
 import ch.ubique.backend.monitoring.service.InfoService;
 import ch.ubique.backend.spring.validation.ValidateResponse;
 

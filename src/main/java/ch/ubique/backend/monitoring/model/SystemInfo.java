@@ -1,4 +1,4 @@
-package ch.ubique.backend.monitoring.info.model;
+package ch.ubique.backend.monitoring.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

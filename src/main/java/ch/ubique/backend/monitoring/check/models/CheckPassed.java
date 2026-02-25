@@ -1,4 +1,4 @@
-package ch.ubique.backend.monitoring.check.model;
+package ch.ubique.backend.monitoring.check.models;
 
 import org.jspecify.annotations.NonNull;
 

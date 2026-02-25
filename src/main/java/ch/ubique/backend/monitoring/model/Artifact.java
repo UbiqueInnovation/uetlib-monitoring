@@ -1,10 +1,8 @@
-package ch.ubique.backend.monitoring.info.model;
+package ch.ubique.backend.monitoring.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.github.zafarkhaja.semver.Version;
-
-import de.westemeyer.version.core.model.Artifact;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -16,23 +14,23 @@ import java.util.Comparator;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public record MonitoringArtifact(
+public record Artifact(
         @NotBlank String groupId, @NotBlank String artifactId, @NotNull @Valid Version version)
-        implements Comparable<MonitoringArtifact> {
+        implements Comparable<Artifact> {
 
-    private static final Comparator<MonitoringArtifact> ARTIFACT_COMPARATOR =
-            Comparator.comparing(MonitoringArtifact::groupId)
-                    .thenComparing(MonitoringArtifact::artifactId)
-                    .thenComparing(MonitoringArtifact::version);
+    private static final Comparator<Artifact> ARTIFACT_COMPARATOR =
+            Comparator.comparing(Artifact::groupId)
+                    .thenComparing(Artifact::artifactId)
+                    .thenComparing(Artifact::version);
 
     @NotNull
-    public static MonitoringArtifact from(final Artifact artifact) {
-        return new MonitoringArtifact(
+    public static Artifact from(final de.westemeyer.version.core.model.Artifact artifact) {
+        return new Artifact(
                 artifact.groupId(), artifact.artifactId(), Version.parse(artifact.version()));
     }
 
     @Override
-    public int compareTo(final @NonNull MonitoringArtifact o) {
+    public int compareTo(final @NonNull Artifact o) {
         return ARTIFACT_COMPARATOR.compare(this, o);
     }
 }

@@ -2,7 +2,7 @@ package ch.ubique.backend.monitoring.service;
 
 import static java.util.Objects.requireNonNull;
 
-import ch.ubique.backend.monitoring.info.model.MonitoringArtifact;
+import ch.ubique.backend.monitoring.model.Artifact;
 
 import com.github.zafarkhaja.semver.Version;
 
@@ -25,20 +25,20 @@ public class VersionService {
     public static final Version SPRING_FRAMEWORK_VERSION =
             Version.parse(requireNonNull(SpringVersion.getVersion()));
 
-    @NonNull private final Collection<MonitoringArtifact> collectedArtifacts;
+    @NonNull private final Collection<Artifact> collectedArtifacts;
 
     public VersionService() {
         final var additionalArtifacts =
                 List.of(
-                        new MonitoringArtifact(
+                        new Artifact(
                                 "org.springframework.boot", "spring-boot", SPRING_BOOT_VERSION),
-                        new MonitoringArtifact(
+                        new Artifact(
                                 "org.springframework",
                                 "spring-framework",
                                 SPRING_FRAMEWORK_VERSION));
         final var serviceLoaderArtifacts =
                 ArtifactVersionCollector.collectArtifacts().stream()
-                        .map(MonitoringArtifact::from)
+                        .map(Artifact::from)
                         .toList();
         collectedArtifacts =
                 Stream.concat(serviceLoaderArtifacts.stream(), additionalArtifacts.stream())
@@ -47,7 +47,7 @@ public class VersionService {
     }
 
     @NonNull
-    public Collection<MonitoringArtifact> collectedArtifacts() {
+    public Collection<Artifact> collectedArtifacts() {
         return collectedArtifacts;
     }
 }
