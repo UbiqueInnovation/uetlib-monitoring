@@ -39,7 +39,6 @@ class InfoServiceTest {
                         Pair.of("ch.ubique", "uetlib-core"),
                         Pair.of("ch.ubique", "uetlib-test"),
                         Pair.of("ch.ubique", "uetlib-spring-boot"),
-                        Pair.of("ch.ubique", "uetlib-spring-boot-validation"),
                         Pair.of("org.springframework.boot", "spring-boot"),
                         Pair.of("org.springframework", "spring-framework"));
         final var actualArtifacts =
