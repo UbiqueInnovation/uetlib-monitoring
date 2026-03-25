@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.2.0
+
+- Drop `uetlib-spring-boot-validation` in favor of `uetlib-spring-boot@v2.1.0`
+
 ## 2.1.0
 
 - Adapt `MonitoringService` to `de:westemeyer:artifact-version-service/maven-plugin:2.0.0`
