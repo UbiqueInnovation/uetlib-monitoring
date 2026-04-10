@@ -4,9 +4,13 @@ import ch.ubique.backend.monitoring.model.InfoResponse;
 import ch.ubique.backend.monitoring.service.InfoService;
 import ch.ubique.backend.spring.validation.ValidateResponse;
 
+import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.Duration;
 
 @Validated
 @ValidateResponse
@@ -26,7 +30,14 @@ public class InfoController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public InfoResponse info() {
-        return infoService.getInfo();
+    public ResponseEntity<InfoResponse> info() {
+        final var stale = Duration.ofMinutes(15);
+        return ResponseEntity.ok()
+                .cacheControl(
+                        CacheControl.maxAge(Duration.ofMinutes(5))
+                                .cachePrivate() // Do not cache in CDNs
+                                .staleWhileRevalidate(stale)
+                                .staleIfError(stale))
+                .body(infoService.getInfo());
     }
 }
