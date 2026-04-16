@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Component;
 
 import tools.jackson.core.JacksonException;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 @Component
 public class CheckResultsToHTMLConverter {
@@ -76,10 +76,10 @@ public class CheckResultsToHTMLConverter {
             }
             """;
 
-    private final ObjectMapper objectMapper;
+    private final JsonMapper jsonMapper;
 
-    public CheckResultsToHTMLConverter(final ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
+    public CheckResultsToHTMLConverter(final JsonMapper jsonMapper) {
+        this.jsonMapper = jsonMapper;
     }
 
     public String convert(final CheckResults results) {
@@ -100,7 +100,7 @@ public class CheckResultsToHTMLConverter {
     // will work even if they get this HTML page instead.
     private DomContent resultsAsJsonScript(final CheckResults results) {
         try {
-            return script(objectMapper.writeValueAsString(results))
+            return script(jsonMapper.writeValueAsString(results))
                     .withId("data")
                     .withType("application/json");
         } catch (final JacksonException e) {
@@ -147,7 +147,7 @@ public class CheckResultsToHTMLConverter {
             case final CheckFailed failed -> {
                 try {
                     yield pre(
-                            objectMapper
+                            jsonMapper
                                     .writerWithDefaultPrettyPrinter()
                                     .writeValueAsString(failed.context()));
                 } catch (final JacksonException e) {
