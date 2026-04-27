@@ -11,7 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 public class MonitoringService {
 
-    private final Logger logger = LoggerFactory.getLogger(MonitoringService.class);
+    private static final Logger logger = LoggerFactory.getLogger(MonitoringService.class);
 
     private final RestClient restClient;
     private final String heartbeatEndpoint;
@@ -40,11 +40,11 @@ public class MonitoringService {
     public void heartbeat() {
         final CheckResults results = statusCheckService.checkAll(CheckLevel.ERROR);
         if (results.allPassed()) {
-            restClient.get().uri(this.heartbeatEndpoint).retrieve().toBodilessEntity();
+            restClient.get().uri(heartbeatEndpoint).retrieve().toBodilessEntity();
         } else {
             restClient
                     .post()
-                    .uri(this.heartbeatFailEndpoint)
+                    .uri(heartbeatFailEndpoint)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(results)
                     .retrieve()
