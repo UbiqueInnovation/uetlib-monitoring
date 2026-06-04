@@ -4,6 +4,7 @@
 
 ### Improvements
 
+- Null-marked it all
 - Add new parameter `check` to `/check` endpoint to run only checks with given class name
 
 ## 2.2.0

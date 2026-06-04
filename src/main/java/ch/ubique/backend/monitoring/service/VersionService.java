@@ -8,7 +8,6 @@ import com.github.zafarkhaja.semver.Version;
 
 import de.westemeyer.version.service.ArtifactVersionCollector;
 
-import org.jspecify.annotations.NonNull;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.core.SpringVersion;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,7 @@ public class VersionService {
     public static final Version SPRING_FRAMEWORK_VERSION =
             Version.parse(requireNonNull(SpringVersion.getVersion()));
 
-    @NonNull private final Collection<Artifact> collectedArtifacts;
+    private final Collection<Artifact> collectedArtifacts;
 
     public VersionService() {
         final var additionalArtifacts =
@@ -46,7 +45,7 @@ public class VersionService {
                         .toList();
     }
 
-    @NonNull
+
     public Collection<Artifact> collectedArtifacts() {
         return collectedArtifacts;
     }
