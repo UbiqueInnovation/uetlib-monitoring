@@ -2,6 +2,8 @@ package ch.ubique.backend.monitoring.check;
 
 import static ch.ubique.backend.core.utils.StringUtils.requireNonBlankElse;
 
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+
 import ch.ubique.backend.core.executor.VirtualThreadUtils;
 import ch.ubique.backend.monitoring.check.models.CheckFailed;
 import ch.ubique.backend.monitoring.check.models.CheckLevel;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -30,12 +33,14 @@ public final class StatusCheckService {
         this.checks = checks;
     }
 
-    public CheckResults checkAll(
-            final @NotNull CheckLevel checkLevel, final @Nullable String checkClassName) {
+    public CheckResults runChecks(
+            final @NotNull CheckLevel checkLevel, final @Nullable List<String> checkClassNames) {
         final var filteredChecks =
-                checkClassName == null
+                isEmpty(checkClassNames)
                         ? checks.stream()
-                        : checks.stream().filter(check -> check.checkName().equals(checkClassName));
+                        : checks.stream()
+                                .filter(check -> checkClassNames.contains(check.checkName()));
+
         final var results =
                 VirtualThreadUtils.mapAll(this::runCheck, filteredChecks)
                         .filter(result -> result.level().isSameOrMoreSevereThan(checkLevel))
