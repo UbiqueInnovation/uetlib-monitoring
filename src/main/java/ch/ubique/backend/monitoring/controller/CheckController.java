@@ -1,6 +1,6 @@
 package ch.ubique.backend.monitoring.controller;
 
-import ch.ubique.backend.core.validator.NullOrNotBlank;
+import ch.ubique.backend.core.validator.NullOrNotEmpty;
 import ch.ubique.backend.monitoring.check.StatusCheckService;
 import ch.ubique.backend.monitoring.check.converter.CheckResultsToHTMLConverter;
 import ch.ubique.backend.monitoring.check.models.CheckLevel;
@@ -12,6 +12,8 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Validated
 @ValidateResponse
@@ -40,16 +42,16 @@ public class CheckController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public CheckResults check(
             @NotNull @RequestParam(defaultValue = "ERROR") final CheckLevel level,
-            @NullOrNotBlank @RequestParam("check") final String checkClassName) {
-        return statusCheckService.checkAll(level, checkClassName);
+            @NullOrNotEmpty @RequestParam("checks") final List<String> checkClassNames) {
+        return statusCheckService.runChecks(level, checkClassNames);
     }
 
     @NotNull
     @GetMapping(produces = MediaType.TEXT_HTML_VALUE)
     public String checkHtml(
             @NotNull @RequestParam(defaultValue = "ERROR") final CheckLevel level,
-            @NullOrNotBlank @RequestParam("check") final String checkClassName) {
-        final var checkResults = statusCheckService.checkAll(level, checkClassName);
+            @NullOrNotEmpty @RequestParam("checks") final List<String> checkClassNames) {
+        final var checkResults = statusCheckService.runChecks(level, checkClassNames);
         return checkResultsToHTMLConverter.convert(checkResults);
     }
 }
