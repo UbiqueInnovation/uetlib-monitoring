@@ -15,9 +15,12 @@
     <packaging>jar</packaging>
 
     <properties>
-        <uetlib-core.version>2.3.0</uetlib-core.version>
-        <uetlib-spring-boot.version>2.1.1</uetlib-spring-boot.version>
+        <uetlib-core.version>2.3.3</uetlib-core.version>
+        <uetlib-spring-boot.version>2.2.0</uetlib-spring-boot.version>
         <uetlib-test.version>2.0.1</uetlib-test.version>
+
+        <!-- westemeyer version config -->
+        <westemeyer-version-package-name>ch.ubique.backend.monitoring.version</westemeyer-version-package-name>
     </properties>
 
     <dependencies>

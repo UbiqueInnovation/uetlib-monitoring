@@ -9,6 +9,7 @@ import j2html.tags.specialized.TableTag;
 
 import jakarta.validation.constraints.NotNull;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Component;
 
 import tools.jackson.core.JacksonException;
@@ -98,7 +99,7 @@ public class CheckResultsToHTMLConverter {
 
     // Include results as json. Ensures that simple string matches that expect the json document
     // will work even if they get this HTML page instead.
-    private DomContent resultsAsJsonScript(final CheckResults results) {
+    private @Nullable DomContent resultsAsJsonScript(final CheckResults results) {
         try {
             return script(jsonMapper.writeValueAsString(results))
                     .withId("data")
@@ -136,14 +137,14 @@ public class CheckResultsToHTMLConverter {
 
     private String checkFailureReason(final CheckStatus status) {
         return switch (status) {
-            case final CheckPassed _s -> "";
+            case final CheckPassed ignored -> "";
             case final CheckFailed failed -> failed.reason();
         };
     }
 
-    private DomContent checkFailureContext(final CheckStatus status) {
+    private @Nullable DomContent checkFailureContext(final CheckStatus status) {
         return switch (status) {
-            case final CheckPassed _s -> null;
+            case final CheckPassed ignored -> null;
             case final CheckFailed failed -> {
                 try {
                     yield pre(

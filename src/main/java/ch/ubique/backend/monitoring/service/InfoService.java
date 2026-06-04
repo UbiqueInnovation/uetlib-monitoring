@@ -42,7 +42,9 @@ public class InfoService {
         final var projectVersion = Version.parse(requireNonNull(buildProperties.getVersion()));
         final var whoami =
                 new Artifact(
-                        buildProperties.getGroup(), buildProperties.getArtifact(), projectVersion);
+                        requireNonNull(buildProperties.getGroup()),
+                        requireNonNull(buildProperties.getArtifact()),
+                        projectVersion);
 
         final var jvmUptime = Duration.ofMillis(ManagementFactory.getRuntimeMXBean().getUptime());
         final var jvmStartTime = TimeUtils.TIME_UTILS_EUROPE_ZURICH.now().minus(jvmUptime);
