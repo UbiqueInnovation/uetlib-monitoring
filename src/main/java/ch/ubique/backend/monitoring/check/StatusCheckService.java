@@ -34,6 +34,11 @@ public final class StatusCheckService {
     }
 
     public CheckResults runChecks(
+            final @NotNull CheckLevel checkLevel) {
+        return runChecks(checkLevel, null);
+    }
+
+    public CheckResults runChecks(
             final @NotNull CheckLevel checkLevel, final @Nullable List<String> checkClassNames) {
         final var filteredChecks =
                 isEmpty(checkClassNames)
