@@ -2,13 +2,14 @@ package ch.ubique.backend.monitoring.service;
 
 import ch.ubique.backend.monitoring.check.StatusCheckService;
 import ch.ubique.backend.monitoring.check.models.CheckLevel;
-import ch.ubique.backend.monitoring.check.models.CheckResults;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
+@SuppressWarnings("unused")
 public class MonitoringService {
 
     private static final Logger logger = LoggerFactory.getLogger(MonitoringService.class);
@@ -31,14 +32,14 @@ public class MonitoringService {
                         .toUri()
                         .toString();
         this.statusCheckService = statusCheckService;
-        this.logger.info(
+        logger.info(
                 "Configured MonitoringService with heartbeat urls:\nbaseurl {}\nfail-url {}",
                 this.heartbeatEndpoint,
-                this.heartbeatFailEndpoint);
+                heartbeatFailEndpoint);
     }
 
     public void heartbeat() {
-        final CheckResults results = statusCheckService.checkAll(CheckLevel.ERROR);
+        final var results = statusCheckService.runChecks(CheckLevel.ERROR);
         if (results.allPassed()) {
             restClient.get().uri(heartbeatEndpoint).retrieve().toBodilessEntity();
         } else {
