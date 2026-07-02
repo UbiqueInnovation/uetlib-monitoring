@@ -9,6 +9,7 @@ import ch.ubique.backend.spring.validation.ValidateResponse;
 
 import jakarta.validation.constraints.NotNull;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +43,8 @@ public class CheckController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public CheckResults check(
             @NotNull @RequestParam(defaultValue = "ERROR") final CheckLevel level,
-            @NullOrNotEmpty @RequestParam("checks") final List<String> checkClassNames) {
+            @NullOrNotEmpty @Nullable @RequestParam(value = "checks", required = false)
+                    final List<String> checkClassNames) {
         return statusCheckService.runChecks(level, checkClassNames);
     }
 
@@ -50,7 +52,8 @@ public class CheckController {
     @GetMapping(produces = MediaType.TEXT_HTML_VALUE)
     public String checkHtml(
             @NotNull @RequestParam(defaultValue = "ERROR") final CheckLevel level,
-            @NullOrNotEmpty @RequestParam("checks") final List<String> checkClassNames) {
+            @NullOrNotEmpty @Nullable @RequestParam(value = "checks", required = false)
+                    final List<String> checkClassNames) {
         final var checkResults = statusCheckService.runChecks(level, checkClassNames);
         return checkResultsToHTMLConverter.convert(checkResults);
     }
