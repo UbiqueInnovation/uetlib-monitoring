@@ -2,15 +2,11 @@ package ch.ubique.backend.monitoring.check;
 
 import static ch.ubique.backend.core.utils.StringUtils.requireNonBlankElse;
 
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
-
 import ch.ubique.backend.core.executor.VirtualThreadUtils;
 import ch.ubique.backend.monitoring.check.models.CheckFailed;
 import ch.ubique.backend.monitoring.check.models.CheckLevel;
 import ch.ubique.backend.monitoring.check.models.CheckResult;
 import ch.ubique.backend.monitoring.check.models.CheckResults;
-
-import jakarta.validation.constraints.NotNull;
 
 import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
@@ -33,15 +29,14 @@ public final class StatusCheckService {
         this.checks = checks;
     }
 
-    public CheckResults runChecks(
-            final @NotNull CheckLevel checkLevel) {
+    public CheckResults runChecks(final CheckLevel checkLevel) {
         return runChecks(checkLevel, null);
     }
 
     public CheckResults runChecks(
-            final @NotNull CheckLevel checkLevel, final @Nullable List<String> checkClassNames) {
+            final CheckLevel checkLevel, final @Nullable List<String> checkClassNames) {
         final var filteredChecks =
-                isEmpty(checkClassNames)
+                checkClassNames == null
                         ? checks.stream()
                         : checks.stream()
                                 .filter(check -> checkClassNames.contains(check.checkName()));
@@ -54,7 +49,7 @@ public final class StatusCheckService {
         return new CheckResults(results);
     }
 
-    private CheckResult runCheck(final @NotNull StatusCheck check) {
+    private CheckResult runCheck(final StatusCheck check) {
         final var checkClass = check.getClass();
         try {
             return check.result();

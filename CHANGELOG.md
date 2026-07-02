@@ -1,11 +1,22 @@
 # CHANGELOG
 
+## 2.3.1
+
+### Bugfixes
+
+- Mark new parameter `checks` on the `/check` endpoint as optional. Any project with `WsPublicEndpointTest` or similar
+  with might need to fix the following line in a test:
+  ```diff
+  - when(statusCheckService.runChecks(any())).thenReturn(new CheckResults(List.of()));
+  + when(statusCheckService.runChecks(any(), any())).thenReturn(new CheckResults(List.of()));
+  ```
+
 ## 2.3.0
 
 ### Improvements
 
 - Null-marked it all
-- Add new parameter `check` to `/check` endpoint to run only checks with given class name
+- Add new parameter `checks` to `/check` endpoint to run only checks with given class name
 
 ## 2.2.0
 
