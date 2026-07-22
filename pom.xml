@@ -15,38 +15,34 @@
     <packaging>jar</packaging>
 
     <properties>
-        <uetlib-core.version>2.4.0</uetlib-core.version>
-        <uetlib-spring-boot.version>2.5.0</uetlib-spring-boot.version>
-        <uetlib-test.version>2.2.0</uetlib-test.version>
-
-        <!-- westemeyer version config -->
+<!-- westemeyer version config -->
         <westemeyer-version-package-name>ch.ubique.backend.monitoring.version</westemeyer-version-package-name>
         <!-- Sonar -->
         <sonar.projectName>uetlib-monitoring</sonar.projectName>
         <sonar.coverage.module>uetlib-monitoring</sonar.coverage.module>
     </properties>
 
-        <dependencyManagement>
-        <dependencies>
+            <dependencyManagement>
+    <dependencies>
             <dependency>
                 <groupId>ch.ubique</groupId>
                 <artifactId>uetlib-test</artifactId>
-                <version>${uetlib-test.version}</version>
+                <version>2.2.0</version>
             </dependency>
             <dependency>
                 <groupId>ch.ubique</groupId>
                 <artifactId>uetlib-spring-boot</artifactId>
-                <version>${uetlib-spring-boot.version}</version>
+                <version>2.5.0</version>
             </dependency>
             <dependency>
                 <groupId>ch.ubique</groupId>
                 <artifactId>uetlib-core</artifactId>
-                <version>${uetlib-core.version}</version>
+                <version>2.4.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
-<dependencies>
+    <dependencies>
         <dependency>
             <groupId>ch.ubique</groupId>
             <artifactId>uetlib-core</artifactId>
