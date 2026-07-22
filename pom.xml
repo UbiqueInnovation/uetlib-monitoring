@@ -22,8 +22,8 @@
         <sonar.coverage.module>uetlib-monitoring</sonar.coverage.module>
     </properties>
 
-            <dependencyManagement>
-    <dependencies>
+    <dependencyManagement>
+        <dependencies>
             <dependency>
                 <groupId>ch.ubique</groupId>
                 <artifactId>uetlib-test</artifactId>
