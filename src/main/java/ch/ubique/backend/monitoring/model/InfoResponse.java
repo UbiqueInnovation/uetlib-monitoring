@@ -32,4 +32,4 @@ public record InfoResponse(
         @NotNull @Valid Version springFrameworkVersion,
         @NotNull @Valid Artifact whoami,
         @NotNull @Valid SystemInfo systemInfo,
-        @NotNull @Valid Collection<Artifact> artifacts) {}
+        @NotNull Collection<@Valid Artifact> artifacts) {}

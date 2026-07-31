@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.3.3
+
+### Bugfixes
+
+- Fix deprecated `@Valid` placement on `InfoResponse.artifacts`.
+
 ## 2.3.2
 
 - updated actions to not run tests twice for sonar
@@ -98,4 +104,3 @@
 
 First release. The code was moved
 from [UbiqueInnovation/backend-jvm-lib](https://github.com/UbiqueInnovation/backend-jvm-lib).
-
