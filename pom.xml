@@ -7,7 +7,7 @@
     <parent>
         <groupId>ch.ubique</groupId>
         <artifactId>uetlib-parent</artifactId>
-        <version>2026.7.6</version>
+        <version>2026.8.0</version>
         <relativePath/>
     </parent>
 
@@ -16,32 +16,13 @@
     <packaging>jar</packaging>
 
     <properties>
-<!-- westemeyer version config -->
+        <!-- westemeyer version config -->
         <westemeyer-version-package-name>ch.ubique.backend.monitoring.version</westemeyer-version-package-name>
+
         <!-- Sonar -->
         <sonar.projectName>uetlib-monitoring</sonar.projectName>
         <sonar.coverage.module>uetlib-monitoring</sonar.coverage.module>
     </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>ch.ubique</groupId>
-                <artifactId>uetlib-test</artifactId>
-                <version>2.2.1</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.ubique</groupId>
-                <artifactId>uetlib-spring-boot</artifactId>
-                <version>2.6.2</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.ubique</groupId>
-                <artifactId>uetlib-core</artifactId>
-                <version>2.4.2</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -76,6 +57,26 @@
             <artifactId>j2html</artifactId>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>ch.ubique</groupId>
+                <artifactId>uetlib-test</artifactId>
+                <version>2.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.ubique</groupId>
+                <artifactId>uetlib-spring-boot</artifactId>
+                <version>2.6.2</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.ubique</groupId>
+                <artifactId>uetlib-core</artifactId>
+                <version>2.4.2</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <repositories>
         <!-- ubique artifactory are necessary for resolution of the parent. -->

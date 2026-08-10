@@ -1,5 +1,7 @@
 package ch.ubique.backend.monitoring.service;
 
+import static ch.ubique.backend.monitoring.utils.VersionUtil.parseVersion;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.github.zafarkhaja.semver.Version;
@@ -23,7 +25,7 @@ class InfoServiceTest {
         assertEquals(
                 String.valueOf(Runtime.version().feature()), infoService.getInfo().javaVersion());
         assertEquals(
-                Version.parse(String.valueOf(KotlinVersion.CURRENT)),
+                parseVersion(String.valueOf(KotlinVersion.CURRENT)),
                 infoService.getInfo().kotlinVersion());
         assertEquals(Version.of(2, 3, 1), infoService.getInfo().projectVersion());
     }

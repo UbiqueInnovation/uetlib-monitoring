@@ -2,15 +2,14 @@ package ch.ubique.backend.monitoring.service;
 
 import static ch.ubique.backend.monitoring.service.VersionService.SPRING_BOOT_VERSION;
 import static ch.ubique.backend.monitoring.service.VersionService.SPRING_FRAMEWORK_VERSION;
+import static ch.ubique.backend.monitoring.utils.VersionUtil.parseVersion;
 
 import static java.util.Objects.requireNonNull;
 
 import ch.ubique.backend.core.utils.TimeUtils;
-import ch.ubique.backend.monitoring.model.InfoResponse;
 import ch.ubique.backend.monitoring.model.Artifact;
+import ch.ubique.backend.monitoring.model.InfoResponse;
 import ch.ubique.backend.monitoring.model.SystemInfo;
-
-import com.github.zafarkhaja.semver.Version;
 
 import kotlin.KotlinVersion;
 
@@ -38,8 +37,8 @@ public class InfoService {
 
     public InfoResponse getInfo() {
         final var javaVersion = String.valueOf(Runtime.version().feature());
-        final var kotlinVersion = Version.parse(KotlinVersion.CURRENT.toString());
-        final var projectVersion = Version.parse(requireNonNull(buildProperties.getVersion()));
+        final var kotlinVersion = parseVersion(KotlinVersion.CURRENT.toString());
+        final var projectVersion = parseVersion(requireNonNull(buildProperties.getVersion()));
         final var whoami =
                 new Artifact(
                         requireNonNull(buildProperties.getGroup()),
