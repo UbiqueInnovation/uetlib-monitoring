@@ -1,14 +1,16 @@
 package ch.ubique.backend.monitoring.model;
 
+import static ch.ubique.backend.monitoring.utils.VersionUtil.parseVersion;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.zafarkhaja.semver.ParseException;
 import com.github.zafarkhaja.semver.Version;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
 
 import java.util.Comparator;
 
@@ -27,8 +29,20 @@ public record Artifact(
 
     @NotNull
     public static Artifact from(final de.westemeyer.version.core.model.Artifact artifact) {
-        return new Artifact(
-                artifact.groupId(), artifact.artifactId(), Version.parse(artifact.version()));
+        try {
+            return new Artifact(
+                    artifact.groupId(), artifact.artifactId(), parseVersion(artifact.version()));
+        } catch (final IllegalArgumentException e) {
+            if (e.getCause() instanceof final ParseException parseException) {
+                throw new IllegalArgumentException(
+                        "Failed to parse version "
+                                + artifact.version()
+                                + " for artifact "
+                                + artifact,
+                        parseException);
+            }
+            throw e;
+        }
     }
 
     @Override

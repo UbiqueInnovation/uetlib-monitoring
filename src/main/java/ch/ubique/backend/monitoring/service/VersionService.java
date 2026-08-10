@@ -1,5 +1,7 @@
 package ch.ubique.backend.monitoring.service;
 
+import static ch.ubique.backend.monitoring.utils.VersionUtil.parseVersion;
+
 import static java.util.Objects.requireNonNull;
 
 import ch.ubique.backend.monitoring.model.Artifact;
@@ -19,10 +21,9 @@ import java.util.stream.Stream;
 @Service
 public class VersionService {
 
-    public static final Version SPRING_BOOT_VERSION =
-            Version.parse(requireNonNull(SpringBootVersion.getVersion()));
+    public static final Version SPRING_BOOT_VERSION = parseVersion(SpringBootVersion.getVersion());
     public static final Version SPRING_FRAMEWORK_VERSION =
-            Version.parse(requireNonNull(SpringVersion.getVersion()));
+            parseVersion(requireNonNull(SpringVersion.getVersion()));
 
     private final Collection<Artifact> collectedArtifacts;
 
@@ -36,15 +37,12 @@ public class VersionService {
                                 "spring-framework",
                                 SPRING_FRAMEWORK_VERSION));
         final var serviceLoaderArtifacts =
-                ArtifactVersionCollector.collectArtifacts().stream()
-                        .map(Artifact::from)
-                        .toList();
+                ArtifactVersionCollector.collectArtifacts().stream().map(Artifact::from).toList();
         collectedArtifacts =
                 Stream.concat(serviceLoaderArtifacts.stream(), additionalArtifacts.stream())
                         .sorted()
                         .toList();
     }
-
 
     public Collection<Artifact> collectedArtifacts() {
         return collectedArtifacts;

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2.4.0
+
+### Improvements
+
+- Throw a better exception on `Version::parse` with info about what version failed person for easier debugging.
+- Java 25 with newest `uetlib-parent:2026.8.0`
+
 ## 2.3.3
 
 ### Bugfixes
