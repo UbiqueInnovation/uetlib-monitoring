@@ -7,22 +7,13 @@
     <parent>
         <groupId>ch.ubique</groupId>
         <artifactId>uetlib-parent</artifactId>
-        <version>2026.8.0</version>
+        <version>2026.8.1</version>
         <relativePath/>
     </parent>
 
     <artifactId>uetlib-monitoring</artifactId>
     <version>3.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-
-    <properties>
-        <!-- westemeyer version config -->
-        <westemeyer-version-package-name>ch.ubique.backend.monitoring.version</westemeyer-version-package-name>
-
-        <!-- Sonar -->
-        <sonar.projectName>uetlib-monitoring</sonar.projectName>
-        <sonar.coverage.module>uetlib-monitoring</sonar.coverage.module>
-    </properties>
 
     <dependencies>
         <dependency>
