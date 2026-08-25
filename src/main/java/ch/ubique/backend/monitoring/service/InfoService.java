@@ -1,7 +1,7 @@
 package ch.ubique.backend.monitoring.service;
 
-import static ch.ubique.backend.monitoring.service.VersionService.SPRING_BOOT_VERSION;
-import static ch.ubique.backend.monitoring.service.VersionService.SPRING_FRAMEWORK_VERSION;
+import static ch.ubique.backend.monitoring.service.artifact.ArtifactVersionService.SPRING_BOOT_VERSION;
+import static ch.ubique.backend.monitoring.service.artifact.ArtifactVersionService.SPRING_FRAMEWORK_VERSION;
 import static ch.ubique.backend.monitoring.utils.VersionUtil.parseVersion;
 
 import static java.util.Objects.requireNonNull;
@@ -11,6 +11,7 @@ import ch.ubique.backend.monitoring.model.Artifact;
 import ch.ubique.backend.monitoring.model.InfoResponse;
 import ch.ubique.backend.monitoring.model.SystemInfo;
 
+import ch.ubique.backend.monitoring.service.artifact.ArtifactVersionService;
 import kotlin.KotlinVersion;
 
 import org.springframework.boot.info.BuildProperties;
@@ -27,11 +28,11 @@ import java.time.Duration;
 @Service
 public class InfoService {
 
-    private final VersionService versionService;
+    private final ArtifactVersionService artifactVersionService;
     private final BuildProperties buildProperties;
 
-    public InfoService(final VersionService versionService, final BuildProperties buildProperties) {
-        this.versionService = versionService;
+    public InfoService(final ArtifactVersionService artifactVersionService, final BuildProperties buildProperties) {
+        this.artifactVersionService = artifactVersionService;
         this.buildProperties = buildProperties;
     }
 
@@ -49,7 +50,7 @@ public class InfoService {
         final var jvmStartTime = TimeUtils.TIME_UTILS_EUROPE_ZURICH.now().minus(jvmUptime);
         final var systemInfo = new SystemInfo(jvmUptime, jvmStartTime);
 
-        final var artifacts = versionService.collectedArtifacts();
+        final var artifacts = artifactVersionService.collectedArtifacts();
 
         return new InfoResponse(
                 projectVersion,

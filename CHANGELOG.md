@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2.5.0
+
+### Improvements
+
+- Collect artifacts that register themselves as a Spring bean in `ch.ubique.versions` as well as the traditional way
+  through `META-INF/services` classes. That package is now part of the component scan in
+  `UetlibMonitoringAutoConfiguration`.
+
 ## 2.4.1
 
 - latest uetlib parent

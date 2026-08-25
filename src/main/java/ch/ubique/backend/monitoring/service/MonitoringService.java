@@ -32,7 +32,7 @@ public class MonitoringService {
                         .toUri()
                         .toString();
         this.statusCheckService = statusCheckService;
-        logger.info(
+        logger.debug(
                 "Configured MonitoringService with heartbeat urls:\nbaseurl {}\nfail-url {}",
                 this.heartbeatEndpoint,
                 heartbeatFailEndpoint);
