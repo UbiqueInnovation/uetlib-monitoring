@@ -7,7 +7,7 @@
     <parent>
         <groupId>ch.ubique</groupId>
         <artifactId>uetlib-parent</artifactId>
-        <version>2026.8.2</version>
+        <version>2026.8.3</version>
         <relativePath/>
     </parent>
 
@@ -44,6 +44,12 @@
         </dependency>
 
         <dependency>
+            <groupId>de.westemeyer</groupId>
+            <artifactId>artifact-version-service-spring-boot</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
             <groupId>com.j2html</groupId>
             <artifactId>j2html</artifactId>
         </dependency>
@@ -68,6 +74,25 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>de.westemeyer</groupId>
+                <artifactId>artifact-version-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate-service</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <serviceType>SPRING_BOOT</serviceType>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <repositories>
         <!-- ubique artifactory are necessary for resolution of the parent. -->
