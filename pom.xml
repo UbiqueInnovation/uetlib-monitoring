@@ -45,8 +45,11 @@
 
         <dependency>
             <groupId>de.westemeyer</groupId>
+            <artifactId>artifact-version-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.westemeyer</groupId>
             <artifactId>artifact-version-service-spring-boot</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <dependency>
