@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.5.1
+
+- Add both `de.westemeyer:artifact-version-service/-spring-boot` unconditionally as it is used `uetlib-monitoring`
+- version updates
+
 ## 2.5.0
 
 ### Improvements
