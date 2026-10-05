@@ -10,8 +10,8 @@ import ch.ubique.backend.core.utils.TimeUtils;
 import ch.ubique.backend.monitoring.model.Artifact;
 import ch.ubique.backend.monitoring.model.InfoResponse;
 import ch.ubique.backend.monitoring.model.SystemInfo;
-
 import ch.ubique.backend.monitoring.service.artifact.ArtifactVersionService;
+
 import kotlin.KotlinVersion;
 
 import org.springframework.boot.info.BuildProperties;
@@ -31,7 +31,9 @@ public class InfoService {
     private final ArtifactVersionService artifactVersionService;
     private final BuildProperties buildProperties;
 
-    public InfoService(final ArtifactVersionService artifactVersionService, final BuildProperties buildProperties) {
+    public InfoService(
+            final ArtifactVersionService artifactVersionService,
+            final BuildProperties buildProperties) {
         this.artifactVersionService = artifactVersionService;
         this.buildProperties = buildProperties;
     }

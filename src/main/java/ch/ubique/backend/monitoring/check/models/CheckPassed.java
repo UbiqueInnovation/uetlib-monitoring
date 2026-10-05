@@ -1,6 +1,5 @@
 package ch.ubique.backend.monitoring.check.models;
 
-
 public record CheckPassed() implements CheckStatus {
 
     @Override
