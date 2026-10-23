@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.5.2
+
+- Allow Infobox frontend origins and localhost:3001 on the info endpoint.
+
 ## 2.5.1
 
 - Add both `de.westemeyer:artifact-version-service/-spring-boot` unconditionally as it is used `uetlib-monitoring`
