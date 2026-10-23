@@ -19,11 +19,9 @@ import java.time.Duration;
 @CrossOrigin(
         origins = {
             "https://status.systems.ubique.ch",
-            "https://infobox.systems.ubique.ch",
             "https://status-dev.systems.ubique.ch",
-            "https://infobox-dev.systems.ubique.ch",
             "http://localhost:3000",
-            "http://localhost:3001",
+            "${ch.ubique.backend.monitoring.cors-origins:}"
         })
 public class InfoController {
 

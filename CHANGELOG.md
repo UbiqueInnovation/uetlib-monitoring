@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.6.0
+
+- Add optional `ch.ubique.backend.monitoring.cors-origins` to extend the info endpoint’s allowed origins without repeating the defaults.
+
 ## 2.5.2
 
 - Allow Infobox frontend origins and localhost:3001 on the info endpoint.
