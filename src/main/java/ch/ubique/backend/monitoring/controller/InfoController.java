@@ -16,11 +16,15 @@ import java.time.Duration;
 @ValidateResponse
 @RestController
 @RequestMapping({"/v1/info", "${ch.ubique.backend.monitoring.info-endpoint:/v1/info}"})
-@CrossOrigin({
-    "https://status.systems.ubique.ch",
-    "https://status-dev.systems.ubique.ch",
-    "http://localhost:3000"
-})
+@CrossOrigin(
+        origins = {
+            "https://status.systems.ubique.ch",
+            "https://infobox.systems.ubique.ch",
+            "https://status-dev.systems.ubique.ch",
+            "https://infobox-dev.systems.ubique.ch",
+            "http://localhost:3000",
+            "http://localhost:3001",
+        })
 public class InfoController {
 
     private final InfoService infoService;
