@@ -1,22 +1,16 @@
 package ch.ubique.backend.monitoring.service;
 
 import static ch.ubique.backend.monitoring.utils.VersionUtil.parseVersion;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import ch.ubique.backend.monitoring.service.artifact.ArtifactVersionService;
-
 import com.github.zafarkhaja.semver.Version;
-
 import de.westemeyer.version.service.spring.ArtifactVersionCollector;
-
-import kotlin.KotlinVersion;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.info.BuildProperties;
-
 import java.util.List;
 import java.util.Properties;
+import kotlin.KotlinVersion;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.info.BuildProperties;
 
 class InfoServiceTest {
 
@@ -34,7 +28,7 @@ class InfoServiceTest {
 
     private static InfoService mockInfoService() {
         final var properties = new Properties();
-        properties.setProperty("group", "ch.ubique");
+        properties.setProperty("group", "ch.ubique.uetlib");
         properties.setProperty("artifact", "uetlib-monitoring");
         properties.setProperty("version", "2.3.1");
         return new InfoService(
