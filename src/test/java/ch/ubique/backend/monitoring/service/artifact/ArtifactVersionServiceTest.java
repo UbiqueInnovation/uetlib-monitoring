@@ -2,22 +2,19 @@ package ch.ubique.backend.monitoring.service.artifact;
 
 import static ch.ubique.backend.monitoring.service.artifact.ArtifactVersionService.SPRING_BOOT_VERSION;
 import static ch.ubique.backend.monitoring.service.artifact.ArtifactVersionService.SPRING_FRAMEWORK_VERSION;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import ch.ubique.backend.monitoring.model.Artifact;
 import ch.ubique.backend.monitoring.service.artifact.config.ArtifactVersionServiceTestConfig;
-
-import org.apache.commons.lang3.tuple.Pair;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.tuple.Pair;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = ArtifactVersionServiceTestConfig.class)
 class ArtifactVersionServiceTest {
@@ -42,9 +39,9 @@ class ArtifactVersionServiceTest {
         final var expectedArtifacts =
                 Set.of(
                         Pair.of("de.westemeyer", "artifact-version-service"),
-                        Pair.of("ch.ubique", "uetlib-core"),
-                        Pair.of("ch.ubique", "uetlib-spring-boot"),
-                        Pair.of("ch.ubique", "uetlib-test"));
+                        Pair.of("ch.ubique.uetlib", "uetlib-core"),
+                        Pair.of("ch.ubique.uetlib", "uetlib-spring-boot"),
+                        Pair.of("ch.ubique.uetlib", "uetlib-test"));
         assertEquals(expectedArtifacts, toIds(artifactVersionService.serviceLoaderArtifacts()));
     }
 
@@ -52,7 +49,7 @@ class ArtifactVersionServiceTest {
     void testSpringBootArtifacts() {
         final var expectedArtifacts =
                 Set.of(
-                        Pair.of("ch.ubique", "uetlib-monitoring"),
+                        Pair.of("ch.ubique.uetlib", "uetlib-monitoring"),
                         Pair.of("de.westemeyer", "artifact-version-service-spring-boot"));
         assertEquals(expectedArtifacts, toIds(artifactVersionService.springBootArtifacts()));
     }
@@ -82,8 +79,9 @@ class ArtifactVersionServiceTest {
     }
 
     /**
-     * Maps artifacts to their group and artifact id, dropping {@code ch.ubique:uetlib-monitoring}
-     * as this is only included when the tests are run from the cli.
+     * Maps artifacts to their group and artifact id, dropping {@code
+     * ch.ubique.uetlib:uetlib-monitoring} as this is only included when the tests are run from the
+     * cli.
      */
     private static Set<Pair<String, String>> toIds(final Collection<Artifact> artifacts) {
         return artifacts.stream()
