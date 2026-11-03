@@ -2,19 +2,22 @@ package ch.ubique.uetlib.monitoring.service.artifact;
 
 import static ch.ubique.uetlib.monitoring.service.artifact.ArtifactVersionService.SPRING_BOOT_VERSION;
 import static ch.ubique.uetlib.monitoring.service.artifact.ArtifactVersionService.SPRING_FRAMEWORK_VERSION;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import ch.ubique.uetlib.monitoring.model.Artifact;
 import ch.ubique.uetlib.monitoring.service.artifact.config.ArtifactVersionServiceTestConfig;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @SpringBootTest(classes = ArtifactVersionServiceTestConfig.class)
 class ArtifactVersionServiceTest {

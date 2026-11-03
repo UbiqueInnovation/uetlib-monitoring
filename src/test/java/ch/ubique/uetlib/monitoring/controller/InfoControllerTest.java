@@ -9,15 +9,18 @@ import ch.ubique.uetlib.monitoring.model.Artifact;
 import ch.ubique.uetlib.monitoring.model.InfoResponse;
 import ch.ubique.uetlib.monitoring.model.SystemInfo;
 import ch.ubique.uetlib.monitoring.service.InfoService;
+
 import com.github.zafarkhaja.semver.Version;
-import java.time.Duration;
-import java.time.ZonedDateTime;
-import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.ResultMatcher;
+
+import java.time.Duration;
+import java.time.ZonedDateTime;
+import java.util.List;
 
 @WebMvcTest(InfoController.class)
 @ContextConfiguration(classes = InfoControllerTestConfig.class)

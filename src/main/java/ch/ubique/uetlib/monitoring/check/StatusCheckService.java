@@ -7,14 +7,16 @@ import ch.ubique.uetlib.monitoring.check.models.CheckFailed;
 import ch.ubique.uetlib.monitoring.check.models.CheckLevel;
 import ch.ubique.uetlib.monitoring.check.models.CheckResult;
 import ch.ubique.uetlib.monitoring.check.models.CheckResults;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+
 import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public final class StatusCheckService {

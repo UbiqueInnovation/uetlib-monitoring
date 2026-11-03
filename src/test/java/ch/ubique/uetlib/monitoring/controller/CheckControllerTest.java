@@ -9,12 +9,14 @@ import ch.ubique.uetlib.monitoring.check.StatusCheckService;
 import ch.ubique.uetlib.monitoring.check.models.CheckLevel;
 import ch.ubique.uetlib.monitoring.check.models.CheckResults;
 import ch.ubique.uetlib.monitoring.controller.config.CheckControllerTestConfig;
-import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.ResultMatcher;
+
+import java.util.List;
 
 @WebMvcTest(CheckController.class)
 @ContextConfiguration(classes = CheckControllerTestConfig.class)

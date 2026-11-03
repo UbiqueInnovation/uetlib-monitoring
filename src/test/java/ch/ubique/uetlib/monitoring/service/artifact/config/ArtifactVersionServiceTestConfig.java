@@ -1,6 +1,7 @@
 package ch.ubique.uetlib.monitoring.service.artifact.config;
 
 import de.westemeyer.version.service.spring.ArtifactVersionServiceAutoConfiguration;
+
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;

@@ -2,6 +2,7 @@ package ch.ubique.uetlib.monitoring.service;
 
 import ch.ubique.uetlib.monitoring.check.StatusCheckService;
 import ch.ubique.uetlib.monitoring.check.models.CheckLevel;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;

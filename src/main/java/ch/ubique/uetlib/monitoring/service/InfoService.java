@@ -3,6 +3,7 @@ package ch.ubique.uetlib.monitoring.service;
 import static ch.ubique.uetlib.monitoring.service.artifact.ArtifactVersionService.SPRING_BOOT_VERSION;
 import static ch.ubique.uetlib.monitoring.service.artifact.ArtifactVersionService.SPRING_FRAMEWORK_VERSION;
 import static ch.ubique.uetlib.monitoring.utils.VersionUtil.parseVersion;
+
 import static java.util.Objects.requireNonNull;
 
 import ch.ubique.uetlib.core.utils.TimeUtils;
@@ -10,11 +11,14 @@ import ch.ubique.uetlib.monitoring.model.Artifact;
 import ch.ubique.uetlib.monitoring.model.InfoResponse;
 import ch.ubique.uetlib.monitoring.model.SystemInfo;
 import ch.ubique.uetlib.monitoring.service.artifact.ArtifactVersionService;
-import java.lang.management.ManagementFactory;
-import java.time.Duration;
+
 import kotlin.KotlinVersion;
+
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Service;
+
+import java.lang.management.ManagementFactory;
+import java.time.Duration;
 
 /**
  * All projects that you want to see the version of <b>must</b> add the {@code

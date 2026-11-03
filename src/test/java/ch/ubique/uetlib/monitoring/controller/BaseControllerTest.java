@@ -1,6 +1,7 @@
 package ch.ubique.uetlib.monitoring.controller;
 
 import ch.ubique.uetlib.monitoring.autoconfigure.UetlibMonitoringAutoConfiguration;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJson;

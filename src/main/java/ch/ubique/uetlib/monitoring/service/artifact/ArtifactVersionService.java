@@ -1,18 +1,22 @@
 package ch.ubique.uetlib.monitoring.service.artifact;
 
 import static ch.ubique.uetlib.monitoring.utils.VersionUtil.parseVersion;
+
 import static java.util.Objects.requireNonNull;
 
 import ch.ubique.uetlib.monitoring.model.Artifact;
+
 import com.github.zafarkhaja.semver.Version;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Stream;
+
 import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.core.SpringVersion;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 public class ArtifactVersionService {
