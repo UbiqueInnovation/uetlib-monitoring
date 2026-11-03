@@ -5,13 +5,16 @@ import ch.ubique.uetlib.monitoring.check.StatusCheckService;
 import ch.ubique.uetlib.monitoring.check.converter.CheckResultsToHTMLConverter;
 import ch.ubique.uetlib.monitoring.check.models.CheckLevel;
 import ch.ubique.uetlib.monitoring.check.models.CheckResults;
-import ch.ubique.uetlib.spring.validation.ValidateResponse;
+import ch.ubique.uetlib.spring.boot.validation.ValidateResponse;
+
 import jakarta.validation.constraints.NotNull;
-import java.util.List;
+
 import org.jspecify.annotations.Nullable;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Validated
 @ValidateResponse

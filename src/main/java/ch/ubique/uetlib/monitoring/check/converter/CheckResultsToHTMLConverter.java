@@ -3,11 +3,15 @@ package ch.ubique.uetlib.monitoring.check.converter;
 import static j2html.TagCreator.*;
 
 import ch.ubique.uetlib.monitoring.check.models.*;
+
 import j2html.tags.DomContent;
 import j2html.tags.specialized.TableTag;
+
 import jakarta.validation.constraints.NotNull;
+
 import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Component;
+
 import tools.jackson.core.JacksonException;
 import tools.jackson.databind.json.JsonMapper;
 

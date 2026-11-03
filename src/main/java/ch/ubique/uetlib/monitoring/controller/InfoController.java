@@ -2,13 +2,15 @@ package ch.ubique.uetlib.monitoring.controller;
 
 import ch.ubique.uetlib.monitoring.model.InfoResponse;
 import ch.ubique.uetlib.monitoring.service.InfoService;
-import ch.ubique.uetlib.spring.validation.ValidateResponse;
-import java.time.Duration;
+import ch.ubique.uetlib.spring.boot.validation.ValidateResponse;
+
 import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.Duration;
 
 @Validated
 @ValidateResponse

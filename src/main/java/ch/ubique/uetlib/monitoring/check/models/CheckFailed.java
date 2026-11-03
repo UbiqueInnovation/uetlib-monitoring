@@ -1,8 +1,10 @@
 package ch.ubique.uetlib.monitoring.check.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 

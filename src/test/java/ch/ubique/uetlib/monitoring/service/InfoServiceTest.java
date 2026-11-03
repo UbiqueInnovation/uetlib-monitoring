@@ -1,16 +1,22 @@
 package ch.ubique.uetlib.monitoring.service;
 
 import static ch.ubique.uetlib.monitoring.utils.VersionUtil.parseVersion;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import ch.ubique.uetlib.monitoring.service.artifact.ArtifactVersionService;
+
 import com.github.zafarkhaja.semver.Version;
+
 import de.westemeyer.version.service.spring.ArtifactVersionCollector;
-import java.util.List;
-import java.util.Properties;
+
 import kotlin.KotlinVersion;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.info.BuildProperties;
+
+import java.util.List;
+import java.util.Properties;
 
 class InfoServiceTest {
 
