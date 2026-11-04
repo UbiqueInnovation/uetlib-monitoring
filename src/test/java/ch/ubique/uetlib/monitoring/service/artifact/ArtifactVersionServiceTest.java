@@ -83,7 +83,7 @@ class ArtifactVersionServiceTest {
 
     /**
      * Maps artifacts to their group and artifact id, dropping {@code
-     * ch.ubique.uetlib:uetlib-monitoring} as this is only included when the tests are run from the
+     * ch.uetlib:uetlib-monitoring} as this is only included when the tests are run from the
      * cli.
      */
     private static Set<Pair<String, String>> toIds(final Collection<Artifact> artifacts) {
