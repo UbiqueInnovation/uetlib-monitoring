@@ -19,7 +19,7 @@ import java.util.List;
 @Validated
 @ValidateResponse
 @RestController
-@RequestMapping({"/check", "${ch.ubique.backend.monitoring.check-endpoint:/check}"})
+@RequestMapping({"/check", "${ch.uetlib.monitoring.check-endpoint:/check}"})
 @CrossOrigin(
         value = {
             "https://status.systems.ubique.ch",

@@ -15,13 +15,13 @@ import java.time.Duration;
 @Validated
 @ValidateResponse
 @RestController
-@RequestMapping({"/v1/info", "${ch.ubique.backend.monitoring.info-endpoint:/v1/info}"})
+@RequestMapping({"/v1/info", "${ch.uetlib.monitoring.info-endpoint:/v1/info}"})
 @CrossOrigin(
         origins = {
             "https://status.systems.ubique.ch",
             "https://status-dev.systems.ubique.ch",
             "http://localhost:3000",
-            "${ch.ubique.backend.monitoring.cors-origins:}"
+            "${ch.uetlib.monitoring.cors-origins:}"
         })
 public class InfoController {
 
