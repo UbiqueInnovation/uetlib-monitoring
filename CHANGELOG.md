@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 3.0.0
+## 3.0.1
 
 - Rename uetlib configuration keys and property references to `ch.uetlib.*`, including Spring bindings, `@Value`,
   conditions, scheduling expressions and configuration files. Migrate external deployment configuration as well.
@@ -52,7 +52,7 @@ separately. Use `:dryRun` instead of `:run` to preview a patch.
 
 ### Improvements
 
-- Collect artifacts that register themselves as a Spring bean in `ch.ubique.versions` as well as the traditional way
+- Collect artifacts that register themselves as a Spring bean in `ch.uetlib.versions` as well as the traditional way
   through `META-INF/services` classes. That package is now part of the component scan in
   `UetlibMonitoringAutoConfiguration`.
 
