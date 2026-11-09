@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.0.2
+
+- Update shared Maven build and publish workflows to v0.2.4.
+
 ## 3.0.1
 
 - Rename uetlib configuration keys and property references to `ch.uetlib.*`, including Spring bindings, `@Value`,
