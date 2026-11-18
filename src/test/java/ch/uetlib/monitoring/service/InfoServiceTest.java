@@ -24,8 +24,8 @@ class InfoServiceTest {
     void testInfoResponse() {
         final var infoService = mockInfoService();
 
-        assertEquals(
-                String.valueOf(Runtime.version().feature()), infoService.getInfo().javaVersion());
+        assertEquals(Runtime.version().toString(), infoService.getInfo().javaVersion());
+        assertEquals(System.getProperty("java.vendor"), infoService.getInfo().javaVendor());
         assertEquals(
                 parseVersion(String.valueOf(KotlinVersion.CURRENT)),
                 infoService.getInfo().kotlinVersion());

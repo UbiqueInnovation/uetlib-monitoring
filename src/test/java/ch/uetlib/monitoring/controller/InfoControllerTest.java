@@ -34,7 +34,8 @@ class InfoControllerTest extends BaseControllerTest {
                 .thenReturn(
                         new InfoResponse(
                                 Version.parse("1.2.3"),
-                                String.valueOf(Runtime.version().feature()),
+                                Runtime.version().toString(),
+                                System.getProperty("java.vendor"),
                                 Version.parse("0.0.0"),
                                 Version.parse("4.0.5"),
                                 Version.parse("7.0.6"),

@@ -13,8 +13,8 @@ import java.util.Collection;
  * Response for the info endpoint.
  *
  * @param projectVersion
- * @param javaVersion Usually, only the major version. Expect a relaxed semver format, where both
- *     minor and patch might be missing.
+ * @param javaVersion Full runtime version, including the build number.
+ * @param javaVendor Runtime vendor.
  * @param kotlinVersion
  * @param springBootVersion
  * @param springFrameworkVersion
@@ -27,6 +27,7 @@ import java.util.Collection;
 public record InfoResponse(
         @NotNull @Valid Version projectVersion,
         @NotNull @Valid String javaVersion,
+        @NotNull @Valid String javaVendor,
         @NotNull @Valid Version kotlinVersion,
         @NotNull @Valid Version springBootVersion,
         @NotNull @Valid Version springFrameworkVersion,
