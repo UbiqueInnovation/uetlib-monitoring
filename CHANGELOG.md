@@ -2,6 +2,8 @@
 
 ## 3.1.0
 
+- Build pull requests, including forks, and pushes to `main` instead of every branch push; use shared Maven
+  workflows at `v1.1.1`.
 - Set the full Java runtime Version as `javaVersion` and include the vendor as `javaVendor`.
 
 ## 3.0.3
