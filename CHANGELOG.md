@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.1.0
+
+- Set the full Java runtime Version as `javaVersion` and include the vendor as `javaVendor`.
+
 ## 3.0.3
 
 - Use shared Maven workflows at `v1.1.0`: wait for the SonarCloud quality gate and analyse with the
