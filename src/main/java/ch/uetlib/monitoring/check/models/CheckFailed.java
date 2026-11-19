@@ -22,6 +22,11 @@ public record CheckFailed(
     }
 
     @Override
+    public boolean passed() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("reason", reason)

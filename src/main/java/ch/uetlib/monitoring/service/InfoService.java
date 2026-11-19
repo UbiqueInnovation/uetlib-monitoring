@@ -22,8 +22,8 @@ import java.time.Duration;
 
 /**
  * All projects that you want to see the version of <b>must</b> add the {@code
- * artifact-version-maven-plugin} to that artifact's pom or parent pom. Check the usage in the pom:
- * {@see pom.xml}
+ * artifact-version-maven-plugin} to that artifact's pom or parent pom. Check the usage in the
+ * {@code pom.xml}.
  */
 @Service
 public class InfoService {

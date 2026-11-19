@@ -8,6 +8,11 @@ public record CheckPassed() implements CheckStatus {
     }
 
     @Override
+    public boolean passed() {
+        return true;
+    }
+
+    @Override
     public String toString() {
         return message();
     }

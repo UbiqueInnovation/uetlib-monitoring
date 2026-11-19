@@ -9,8 +9,8 @@ public sealed interface CheckStatus permits CheckPassed, CheckFailed {
     @JsonProperty
     String message();
 
+    // Not a default method: initialising CheckPassed must not initialise this interface, whose
+    // CHECK_PASSED constant creates a CheckPassed (class initialisation deadlock).
     @JsonProperty
-    default boolean passed() {
-        return this instanceof CheckPassed;
-    }
+    boolean passed();
 }

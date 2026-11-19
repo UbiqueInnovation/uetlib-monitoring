@@ -12,15 +12,8 @@ import java.util.Collection;
 /**
  * Response for the info endpoint.
  *
- * @param projectVersion
  * @param javaVersion Full runtime version, including the build number.
  * @param javaVendor Runtime vendor.
- * @param kotlinVersion
- * @param springBootVersion
- * @param springFrameworkVersion
- * @param whoami
- * @param systemInfo
- * @param artifacts
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
