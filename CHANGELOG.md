@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## UNRELEASED
+
+- Fix a possible class initialisation deadlock between `CheckStatus` and `CheckPassed`: `passed()` is
+  implemented by `CheckPassed` and `CheckFailed` instead of a default method.
+- Fix broken Javadoc tags reported by Error Prone's default checks.
+
 ## 3.1.0
 
 - Build pull requests, including forks, and pushes to `main` instead of every branch push; use shared Maven
